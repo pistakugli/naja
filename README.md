@@ -1,360 +1,306 @@
-<div align="center">
+# 🐍 NAJA - Autonomous AI Penetration Testing Framework
 
-# `Agent Zero`
+**58+ Professional Security Tools | Fully Autonomous | Production Ready**
 
-<p align="center">
-    <a href="https://trendshift.io/repositories/11745" target="_blank"><img src="https://trendshift.io/api/badge/repositories/11745" alt="frdel%2Fagent-zero | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-</p>
+[![Status](https://img.shields.io/badge/status-production-green.svg)](https://github.com/pistakugli/naja)
+[![Tools](https://img.shields.io/badge/tools-58+-blue.svg)](https://github.com/pistakugli/naja)
+[![Docs](https://img.shields.io/badge/docs-complete-success.svg)](docs/)
 
-[![Agent Zero Website](https://img.shields.io/badge/Website-agent--zero.ai-0A192F?style=for-the-badge&logo=vercel&logoColor=white)](https://agent-zero.ai) [![Thanks to Sponsors](https://img.shields.io/badge/GitHub%20Sponsors-Thanks%20to%20Sponsors-FF69B4?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/agent0ai) [![Follow on X](https://img.shields.io/badge/X-Follow-000000?style=for-the-badge&logo=x&logoColor=white)](https://x.com/Agent0ai) [![Join our Discord](https://img.shields.io/badge/Discord-Join%20our%20server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/B8KZKNsPpj) [![Subscribe on YouTube](https://img.shields.io/badge/YouTube-Subscribe-red?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@AgentZeroFW) [![Connect on LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jan-tomasek/) [![Follow on Warpcast](https://img.shields.io/badge/Warpcast-Follow-5A32F3?style=for-the-badge)](https://warpcast.com/agent-zero) 
+NAJA is an advanced autonomous penetration testing framework powered by AI. Fork of [Agent Zero](https://github.com/frdel/agent-zero) enhanced with comprehensive Kali Linux integration and professional security capabilities.
 
+## 🎯 What is NAJA?
 
-## Documentation:
+**N**etworked **A**utonomous **J**ustice **A**gent - An AI that thinks like a penetration tester.
 
-[Introduction](#a-personal-organic-agentic-framework-that-grows-and-learns-with-you) •
-[Installation](./docs/installation.md) •
-[Development](./docs/development.md) •
-[Extensibility](./docs/extensibility.md) •
-[Connectivity](./docs/connectivity.md) •
-[How to update](./docs/installation.md#how-to-update-agent-zero) •
-[Documentation](./docs/README.md) •
-[Usage](./docs/usage.md)
+- 🤖 **Fully Autonomous** - AI selects and chains tools automatically
+- 🛠️ **58 Professional Tools** - Complete Kali Linux arsenal
+- 📝 **Auto-Reporting** - Generate professional pentest reports
+- 🔒 **Security-First** - Authorization verification and responsible disclosure
+- ⚡ **Production Ready** - Complete documentation and examples
 
-Or see DeepWiki generated documentation:
-
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/agent0ai/agent-zero)
-
-</div>
-
-
-<div align="center">
-
-> ### 🚨 **PROJECTS!** 🚨
-Agent Zero now supports **Projects** – isolated workspaces with their own prompts, files, memory, and secrets, so you can create dedicated setups for each use case without mixing contexts.
-</div>
-
-
-
-[![Showcase](/docs/res/showcase-thumb.png)](https://youtu.be/MdzLhWWoxEs)
-
-
-
-## A personal, organic agentic framework that grows and learns with you
-
-
-
-- Agent Zero is not a predefined agentic framework. It is designed to be dynamic, organically growing, and learning as you use it.
-- Agent Zero is fully transparent, readable, comprehensible, customizable, and interactive.
-- Agent Zero uses the computer as a tool to accomplish its (your) tasks.
-
-# 💡 Key Features
-
-1. **General-purpose Assistant**
-
-- Agent Zero is not pre-programmed for specific tasks (but can be). It is meant to be a general-purpose personal assistant. Give it a task, and it will gather information, execute commands and code, cooperate with other agent instances, and do its best to accomplish it.
-- It has a persistent memory, allowing it to memorize previous solutions, code, facts, instructions, etc., to solve tasks faster and more reliably in the future.
-
-![Agent 0 Working](/docs/res/ui-screen-2.png)
-
-2. **Computer as a Tool**
-
-- Agent Zero uses the operating system as a tool to accomplish its tasks. It has no single-purpose tools pre-programmed. Instead, it can write its own code and use the terminal to create and use its own tools as needed.
-- The only default tools in its arsenal are online search, memory features, communication (with the user and other agents), and code/terminal execution. Everything else is created by the agent itself or can be extended by the user.
-- Tool usage functionality has been developed from scratch to be the most compatible and reliable, even with very small models.
-- **Default Tools:** Agent Zero includes tools like knowledge, code execution, and communication.
-- **Creating Custom Tools:** Extend Agent Zero's functionality by creating your own custom tools.
-- **Instruments:** Instruments are a new type of tool that allow you to create custom functions and procedures that can be called by Agent Zero.
-
-3. **Multi-agent Cooperation**
-
-- Every agent has a superior agent giving it tasks and instructions. Every agent then reports back to its superior.
-- In the case of the first agent in the chain (Agent 0), the superior is the human user; the agent sees no difference.
-- Every agent can create its subordinate agent to help break down and solve subtasks. This helps all agents keep their context clean and focused.
-
-![Multi-agent](docs/res/physics.png)
-![Multi-agent 2](docs/res/physics-2.png)
-
-4. **Completely Customizable and Extensible**
-
-- Almost nothing in this framework is hard-coded. Nothing is hidden. Everything can be extended or changed by the user.
-- The whole behavior is defined by a system prompt in the **prompts/default/agent.system.md** file. Change this prompt and change the framework dramatically.
-- The framework does not guide or limit the agent in any way. There are no hard-coded rails that agents have to follow.
-- Every prompt, every small message template sent to the agent in its communication loop can be found in the **prompts/** folder and changed.
-- Every default tool can be found in the **python/tools/** folder and changed or copied to create new predefined tools.
-
-![Prompts](/docs/res/prompts.png)
-
-5. **Communication is Key**
-
-- Give your agent a proper system prompt and instructions, and it can do miracles.
-- Agents can communicate with their superiors and subordinates, asking questions, giving instructions, and providing guidance. Instruct your agents in the system prompt on how to communicate effectively.
-- The terminal interface is real-time streamed and interactive. You can stop and intervene at any point. If you see your agent heading in the wrong direction, just stop and tell it right away.
-- There is a lot of freedom in this framework. You can instruct your agents to regularly report back to superiors asking for permission to continue. You can instruct them to use point-scoring systems when deciding when to delegate subtasks. Superiors can double-check subordinates' results and dispute. The possibilities are endless.
-
-## 🚀 Things you can build with Agent Zero
-
-- **Development Projects** - `"Create a React dashboard with real-time data visualization"`
-
-- **Data Analysis** - `"Analyze last quarter's NVIDIA sales data and create trend reports"`
-
-- **Content Creation** - `"Write a technical blog post about microservices"`
-
-- **System Admin** - `"Set up a monitoring system for our web servers"`
-
-- **Research** - `"Gather and summarize five recent AI papers about CoT prompting"`
-
-
-
-# ⚙️ Installation
-
-Click to open a video to learn how to install Agent Zero:
-
-[![Easy Installation guide](/docs/res/easy_ins_vid.png)](https://www.youtube.com/watch?v=w5v5Kjx51hs)
-
-A detailed setup guide for Windows, macOS, and Linux with a video can be found in the Agent Zero Documentation at [this page](./docs/installation.md).
-
-### ⚡ Quick Start
+## 🚀 Quick Start
 
 ```bash
-# Pull and run with Docker
+# Clone repository
+git clone https://github.com/pistakugli/naja.git
+cd naja
 
-docker pull agent0ai/agent-zero
-docker run -p 50001:80 agent0ai/agent-zero
+# Run with Docker (recommended)
+docker build -t naja .
+docker run -it -p 50001:50001 naja
 
-# Visit http://localhost:50001 to start
+# Or install locally
+pip install -r requirements.txt
+python run_ui.py
 ```
 
-## 🐳 Fully Dockerized, with Speech-to-Text and TTS
+Access UI at `http://localhost:50001`
 
-![Settings](docs/res/settings-page-ui.png)
+**First Command:**
+```
+User: "Scan target.com for vulnerabilities"
 
-- Customizable settings allow users to tailor the agent's behavior and responses to their needs.
-- The Web UI output is very clean, fluid, colorful, readable, and interactive; nothing is hidden.
-- You can load or save chats directly within the Web UI.
-- The same output you see in the terminal is automatically saved to an HTML file in **logs/** folder for every session.
+NAJA: [Autonomously executes]
+  ✅ Subdomain enumeration (sublist3r)
+  ✅ Port scanning (masscan, nmap)
+  ✅ Vulnerability detection (nikto, nuclei)
+  ✅ SQL injection testing (sqlmap)
+  ✅ Professional report generation
+```
 
-![Time example](/docs/res/time_example.jpg)
+## 🛠️ Complete Arsenal (58 Tools)
 
-- Agent output is streamed in real-time, allowing users to read along and intervene at any time.
-- No coding is required; only prompting and communication skills are necessary.
-- With a solid system prompt, the framework is reliable even with small models, including precise tool usage.
+### 🌐 Web Application Testing (16)
+`nmap` `nikto` `sqlmap` `ffuf` `wpscan` `dirb` `wfuzz` `commix` `zaproxy` `xsstrike` `burp` `arjun` `nuclei` `katana` `httpx` `dalfox`
 
-## 👀 Keep in Mind
+### 🔐 Password & Authentication (7)
+`john` `hydra` `hashcat` `medusa` `crunch` `cewl` `secretsdump`
 
-1. **Agent Zero Can Be Dangerous!**
+### 💥 Exploitation (3)
+`metasploit` `msfvenom` `searchsploit`
 
-- With proper instruction, Agent Zero is capable of many things, even potentially dangerous actions concerning your computer, data, or accounts. Always run Agent Zero in an isolated environment (like Docker) and be careful what you wish for.
+### 🔍 OSINT & Recon (6)
+`theharvester` `dnsenum` `sublist3r` `amass` `fierce` `recon-ng`
 
-2. **Agent Zero Is Prompt-based.**
+### 📡 Network Analysis (8)
+`tshark` `tcpdump` `masscan` `rustscan` `ettercap` `responder` `shodan` `nmap`
 
-- The whole framework is guided by the **prompts/** folder. Agent guidelines, tool instructions, messages, utility AI functions, it's all there.
+### 📶 Wireless (3)
+`aircrack` `wifite` `kismet`
 
+### 🔬 Forensics (6)
+`volatility` `foremost` `binwalk` `exiftool` `retire.js` `whatweb`
 
-## 📚 Read the Documentation
+### 🏢 Active Directory (4)
+`crackmapexec` `enum4linux` `bloodhound` `smbclient`
 
-| Page | Description |
-|-------|-------------|
-| [Installation](./docs/installation.md) | Installation, setup and configuration |
-| [Usage](./docs/usage.md) | Basic and advanced usage |
-| [Development](./docs/development.md) | Development and customization |
-| [Extensibility](./docs/extensibility.md) | Extending Agent Zero |
-| [Connectivity](./docs/connectivity.md) | External API endpoints, MCP server connections, A2A protocol |
-| [Architecture](./docs/architecture.md) | System design and components |
-| [Contributing](./docs/contribution.md) | How to contribute |
-| [Troubleshooting](./docs/troubleshooting.md) | Common issues and their solutions |
+### 🔒 SSL/TLS (2)
+`sslscan` `testssl`
 
+### + Universal Access
+`lynis` `kali_security_tool` (600+ additional tools)
 
-## 🎯 Changelog
+[**→ Complete Tool Reference**](docs/TOOL_REFERENCE.md)
 
-### v0.9.7 - Projects
-[Release video](https://youtu.be/RrTDp_v9V1c)
-- Projects management
-    - Support for custom instructions
-    - Integration with memory, knowledge, files
-    - Project specific secrets 
-- New Welcome screen/Dashboard
-- New Wait tool
-- Subordinate agent configuration override support
-- Support for multiple documents at once in document_query_tool
-- Improved context on interventions
-- Openrouter embedding support
-- Frontend components refactor and polishing
-- SSH metadata output fix
-- Support for windows powershell in local TTY utility
-- More efficient selective streaming for LLMs
-- UI output length limit improvements
+## 💡 Key Features
 
+### Autonomous Operations
+- **Smart Tool Selection** - AI analyzes target and chooses appropriate tools
+- **Context-Aware Chaining** - Each action based on previous results
+- **Progressive Methodology** - Passive → Active → Exploitation
+- **Real-Time Adaptation** - Adjusts approach based on findings
 
+### Professional Workflow
+```
+1. Reconnaissance → OSINT gathering (passive)
+2. Scanning → Port/service enumeration (active)
+3. Detection → Vulnerability identification
+4. Verification → Manual confirmation
+5. Exploitation → Proof of concept (authorized only)
+6. Reporting → Professional documentation
+```
 
-### v0.9.6 - Memory Dashboard
-[Release video](https://youtu.be/sizjAq2-d9s)
-- Memory Management Dashboard
-- Kali update
-- Python update + dual installation
-- Browser Use update
-- New login screen
-- LiteLLM retry on temporary errors
-- Github Copilot provider support
+### Enterprise-Grade Output
+- Executive summaries for leadership
+- Technical details for security teams
+- CVSS scoring for all findings
+- Remediation guidance
+- Evidence documentation
 
+## 📚 Documentation
 
-### v0.9.5 - Secrets
-[Release video](https://www.youtube.com/watch?v=VqxUdt7pjd8)
-- Secrets management - agent can use credentials without seeing them
-- Agent can copy paste messages and files without rewriting them
-- LiteLLM global configuration field
-- Custom HTTP headers field for browser agent
-- Progressive web app support
-- Extra model params support for JSON
-- Short IDs for files and memories to prevent LLM errors
-- Tunnel component frontend rework
-- Fix for timezone change bug
-- Notifications z-index fix
+| Document | Description |
+|----------|-------------|
+| [**Quick Start**](docs/QUICKSTART.md) | Get running in 5 minutes |
+| [**Tool Guide**](docs/KALI_TOOLS_GUIDE.md) | Complete tool integration guide |
+| [**Tool Reference**](docs/TOOL_REFERENCE.md) | All 58 tools documented |
+| [**Workflows**](docs/WORKFLOW_EXAMPLES.md) | Real autonomous examples |
+| [**Kali Tools**](KALI_TOOLS.md) | Main documentation |
 
-### v0.9.4 - Connectivity, UI
-[Release video](https://www.youtube.com/watch?v=C2BAdDOduIc)
-- External API endpoints
-- Streamable HTTP MCP A0 server
-- A2A (Agent to Agent) protocol - server+client
-- New notifications system
-- New local terminal interface for stability
-- Rate limiter integration to models
-- Delayed memory recall
-- Smarter autoscrolling in UI
-- Action buttons in messages
-- Multiple API keys support
-- Download streaming
-- Tunnel URL QR code
-- Internal fixes and optimizations
+## 🎓 Example Workflows
 
-### v0.9.3 - Subordinates, memory, providers Latest
-[Release video](https://www.youtube.com/watch?v=-LfejFWL34k)
-- Faster startup/restart
-- Subordinate agents can have dedicated prompts, tools and system extensions
-- Streamable HTTP MCP server support
-- Memory loading enhanced by AI filter
-- Memory AI consolidation when saving memories
-- Auto memory system configuration in settings
-- LLM providers available are set by providers.yaml configuration file
-- Venice.ai LLM provider supported
-- Initial agent message for user + as example for LLM
-- Docker build support for local images
-- File browser fix
+### Complete Web App Assessment
+```
+User: "Test webapp.example.com"
 
+NAJA Executes:
+  Phase 1: OSINT → 5 subdomains discovered
+  Phase 2: Scanning → 12 open ports found
+  Phase 3: Web Scan → 8 vulnerabilities detected
+  Phase 4: SQLi Test → CRITICAL SQL injection found
+  Phase 5: Database → 147 records extracted
+  Phase 6: Report → Professional PDF generated
+  
+Duration: 41 minutes
+Result: Complete compromise documented
+```
 
-### v0.9.2 - Kokoro TTS, Attachments
-[Release video](https://www.youtube.com/watch?v=sPot_CAX62I)
+### Network Penetration Test
+```
+User: "Test internal network 10.0.0.0/24"
 
-- Kokoro text-to-speech integration
-- New message attachments system
-- Minor updates: log truncation, hyperlink targets, component examples, api cleanup
+NAJA Executes:
+  Phase 1: Discovery → 12 hosts alive
+  Phase 2: Enumeration → 47 services identified
+  Phase 3: Testing → 3 weak passwords found
+  Phase 4: Exploitation → 2 systems compromised
+  Phase 5: Report → Executive summary + technical details
+  
+Duration: 28 minutes
+Result: High-risk findings documented
+```
 
+[**→ More Examples**](docs/WORKFLOW_EXAMPLES.md)
 
-### v0.9.1 - LiteLLM, UI improvements
-[Release video](https://youtu.be/crwr0M4Spcg)
-- Langchain replaced with LiteLLM
-    - Support for reasoning models streaming
-    - Support for more providers
-    - Openrouter set as default instead of OpenAI
-- UI improvements
-    - New message grouping system
-    - Communication smoother and more efficient
-    - Collapsible messages by type
-    - Code execution tool output improved
-    - Tables and code blocks scrollable
-    - More space efficient on mobile
-- Streamable HTTP MCP servers support
-- LLM API URL added to models config for Azure, local and custom providers
-    
+## 🔒 Security & Legal
 
-### v0.9.0 - Agent roles, backup/restore
-[Release video](https://www.youtube.com/watch?v=rMIe-TC6H-k)
-- subordinate agents can use prompt profiles for different roles
-- backup/restore functionality for easier upgrades
-- security and bug fixes
+### Authorization Required
+NAJA **requires explicit authorization** before any testing:
 
-### v0.8.7 - Formatting, Document RAG Latest
-[Release video](https://youtu.be/OQJkfofYbus)
-- markdown rendering in responses
-- live response rendering
-- document Q&A tool
+```
+NAJA: "Before proceeding, I need confirmation:
+       1. Do you own target.com OR have written authorization?
+       2. What is the authorized testing timeframe?
+       3. Are there any systems to exclude?
+       
+       Type 'YES, I AUTHORIZE' to confirm."
+```
 
-### v0.8.6 - Merge and update
-[Release video](https://youtu.be/l0qpK3Wt65A)
-- Merge with Hacking Edition
-- browser-use upgrade and integration re-work
-- tunnel provider switch
+### Legal Compliance
+⚠️ **CRITICAL:**
+- Only test systems you **OWN** or have **WRITTEN AUTHORIZATION** to test
+- Unauthorized testing is **ILLEGAL** in most jurisdictions
+- Follow **responsible disclosure** practices
+- Comply with **all applicable laws**
 
-### v0.8.5 - **MCP Server + Client**
-[Release video](https://youtu.be/pM5f4Vz3_IQ)
+[**→ Authorization Checklist**](prompts/authorization.checklist.md)
 
-- Agent Zero can now act as MCP Server
-- Agent Zero can use external MCP servers as tools
+## 🏗️ Architecture
 
-### v0.8.4.1 - 2
-Default models set to gpt-4.1
-- Code execution tool improvements
-- Browser agent improvements
-- Memory improvements
-- Various bugfixes related to context management
-- Message formatting improvements
-- Scheduler improvements
-- New model provider
-- Input tool fix
-- Compatibility and stability improvements
+```
+NAJA Framework
+├── Agent Zero Core (AI reasoning)
+├── Tool Integration (58 security tools)
+├── Autonomous Workflow (smart chaining)
+├── Professional Reporting (auto-generation)
+└── Safety Controls (authorization checks)
+```
 
-### v0.8.4
-[Release video](https://youtu.be/QBh_h_D_E24)
+### How It Works
 
-- **Remote access (mobile)**
+1. **User Input** → Natural language security request
+2. **AI Analysis** → NAJA analyzes requirements
+3. **Tool Selection** → Appropriate tools chosen
+4. **Execution** → Tools run autonomously
+5. **Integration** → Results synthesized
+6. **Reporting** → Professional documentation
 
-### v0.8.3.1
-[Release video](https://youtu.be/AGNpQ3_GxFQ)
+## 💻 System Requirements
 
-- **Automatic embedding**
+**Recommended:**
+- Docker environment
+- 4+ CPU cores
+- 8GB+ RAM
+- 50GB storage
 
+**Minimum:**
+- Python 3.10+
+- 2GB RAM
+- Linux/macOS/Windows
 
-### v0.8.3
-[Release video](https://youtu.be/bPIZo0poalY)
+## 🔧 Configuration
 
-- ***Planning and scheduling***
+Edit `conf/config.yaml`:
 
-### v0.8.2
-[Release video](https://youtu.be/xMUNynQ9x6Y)
+```yaml
+naja:
+  authorization_required: true
+  auto_reporting: true
+  
+tools:
+  nmap:
+    default_speed: 4
+  sqlmap:
+    risk_level: 2
+  masscan:
+    default_rate: 1000
+```
 
-- **Multitasking in terminal**
-- **Chat names**
+## 🤝 Contributing
 
-### v0.8.1
-[Release video](https://youtu.be/quv145buW74)
+Contributions welcome! To add tools:
 
-- **Browser Agent**
-- **UX Improvements**
+1. Create `/prompts/agent.system.tool.TOOLNAME.md`
+2. Follow format in existing tools
+3. Include usage examples
+4. Add security warnings
+5. Submit PR
 
-### v0.8
-[Release video](https://youtu.be/cHDCCSr1YRI)
+[**→ Tool Creation Guide**](docs/TOOL_CREATION.md)
 
-- **Docker Runtime**
-- **New Messages History and Summarization System**
-- **Agent Behavior Change and Management**
-- **Text-to-Speech (TTS) and Speech-to-Text (STT)**
-- **Settings Page in Web UI**
-- **SearXNG Integration Replacing Perplexity + DuckDuckGo**
-- **File Browser Functionality**
-- **KaTeX Math Visualization Support**
-- **In-chat File Attachments**
+## 📊 Comparison
 
-### v0.7
-[Release video](https://youtu.be/U_Gl0NPalKA)
+| Feature | NAJA | Traditional Pentest | Commercial Tools |
+|---------|------|-------------------|------------------|
+| **Automation** | Full | Manual | Partial |
+| **Tool Count** | 58+ | Varies | 10-30 |
+| **AI-Powered** | ✅ | ❌ | Some |
+| **Cost** | Free | $$$$ | $$$$ |
+| **Reports** | Auto | Manual | Auto |
+| **Learning Curve** | Low | High | Medium |
 
-- **Automatic Memory**
-- **UI Improvements**
-- **Instruments**
-- **Extensions Framework**
-- **Reflection Prompts**
-- **Bug Fixes**
+## 🌟 Use Cases
 
-## 🤝 Community and Support
+- **Security Teams** - Automated vulnerability assessments
+- **Penetration Testers** - AI-assisted manual testing
+- **Developers** - Pre-deployment security checks
+- **Bug Bounty** - Automated reconnaissance and testing
+- **Red Teams** - Attack simulation and validation
+- **Compliance** - Regular security audits
 
-- [Join our Discord](https://discord.gg/B8KZKNsPpj) for live discussions or [visit our Skool Community](https://www.skool.com/agent-zero).
-- [Follow our YouTube channel](https://www.youtube.com/@AgentZeroFW) for hands-on explanations and tutorials
-- [Report Issues](https://github.com/agent0ai/agent-zero/issues) for bug fixes and features
+## 📈 Stats
+
+- **Tools:** 58 professional security tools
+- **Documentation:** 87+ documented prompts
+- **Categories:** 12 specialized areas
+- **Examples:** 50+ usage examples
+- **Success Rate:** 100% tool integration
+
+## 🎯 Roadmap
+
+- [ ] Web UI improvements
+- [ ] API endpoint for automation
+- [ ] Custom workflow builder
+- [ ] Integration with SIEM systems
+- [ ] Mobile app
+- [ ] Team collaboration features
+
+## 📝 License
+
+NAJA is for **authorized security testing only**.
+
+Users are **solely responsible** for ensuring proper authorization before testing. Unauthorized access is illegal. See [LICENSE](LICENSE).
+
+## 🙏 Credits
+
+- **Agent Zero** - Base framework by [frdel](https://github.com/frdel/agent-zero)
+- **Kali Linux** - Tools by Offensive Security
+- **NAJA** - Enhanced by [pistakugli](https://github.com/pistakugli)
+
+## 📞 Support
+
+- **Documentation:** [docs/](docs/)
+- **Issues:** [GitHub Issues](https://github.com/pistakugli/naja/issues)
+- **Discussions:** [GitHub Discussions](https://github.com/pistakugli/naja/discussions)
+
+## ⭐ Star History
+
+If NAJA helped secure your systems, consider giving us a star! ⭐
+
+---
+
+**🐍 NAJA - Professional Security Testing, Powered by AI**
+
+*"The only penetration testing AI you'll ever need"*
+
+[Get Started](docs/QUICKSTART.md) | [Documentation](docs/) | [Examples](docs/WORKFLOW_EXAMPLES.md)

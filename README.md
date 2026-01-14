@@ -92,11 +92,16 @@ cp .env.example .env
 # Install dependencies
 pip install -r requirements.txt
 
+# Install Claude AI Skills (16 expert workflow systems)
+./install_skills.sh
+
 # Run
 python run_ui.py
 ```
 
 Otvori browser: `http://localhost:50001`
+
+**Note:** Skills provide expert-level guidance for document creation, web design, and specialized workflows. See `skills/README.md` for details.
 
 ### Docker Setup
 
@@ -271,10 +276,16 @@ Dodavanje novih Kali tools:
 ## 📊 Stats
 
 ```
-Agent Zero Framework:  28 tools (original)
-Kali Integration:      58 tools (added)
-Total Tools:           86 security + AI tools
-Documentation:         90+ prompt files
+Agent Zero Framework:  20 tools (original)
+Kali Integration:      58 tools (security testing)
+Claude AI Tools:       12 tools (documents, design, viz)
+Total Tools:           90 tools
+
+Claude AI Skills:      16 expert workflow systems
+- Public Skills:       6 (docx, pptx, xlsx, pdf, web, product)
+- Example Skills:      10 (art, design, workflows)
+
+Documentation:         90+ prompt files + 16 skill guides
 Status:                Active development
 Fixes:                 Agent Zero #803 resolved
 ```

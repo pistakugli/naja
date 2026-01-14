@@ -1,58 +1,81 @@
 ### docx_create:
 
-Creates and edits Microsoft Word (.docx) documents with professional formatting.
-Supports tracked changes, comments, styles, tables, images, headers/footers.
-Can create reports, proposals, letters, resumes, or any professional document.
+Creates Microsoft Word documents (.docx) with professional formatting.
 
-**When to use:**
-- "Create a Word document/report/proposal"
-- "Write a professional letter"
-- "Generate a resume"
-- User needs a document for sharing/printing
-- Any substantial written content that should be in .docx format
+**⚠️ CRITICAL WORKFLOW - MUST FOLLOW:**
 
-**Important:** 
-- Use docx for PROFESSIONAL documents (reports, proposals, business docs)
-- Use markdown for casual content or code documentation
-- Always create the actual file, don't just show content
-
-**Capabilities:**
-- Professional formatting (headers, fonts, styles)
-- Tables and lists
-- Track changes and comments
-- Images and diagrams
-- Headers/footers with page numbers
-- Multiple sections with different formatting
-
-**Usage:**
+**STEP 1: Read Skill First (REQUIRED for professional output)**
 ```json
 {
-  "thoughts": ["User wants a professional project proposal document"],
-  "headline": "Creating project proposal in Word format",
-  "tool_name": "docx_create",
+  "thoughts": ["Must read docx skill to learn professional formatting best practices"],
+  "tool_name": "code_execution_tool",
   "tool_args": {
-    "filename": "project_proposal.docx",
-    "content": {
-      "title": "AI Implementation Proposal",
-      "sections": [
-        {"heading": "Executive Summary", "text": "..."},
-        {"heading": "Technical Approach", "text": "..."},
-        {"heading": "Timeline", "text": "..."}
-      ],
-      "formatting": {
-        "style": "professional",
-        "include_toc": true,
-        "header": "Confidential",
-        "footer": "Page {PAGE}"
-      }
-    }
+    "runtime": "terminal",
+    "code": "cat /home/claude/naja/skills/public/docx/SKILL.md | head -200"
   }
 }
 ```
 
-**Best practices:**
-- Read /mnt/skills/public/docx/SKILL.md for complete capabilities
-- Create file in /home/claude first for processing
-- Move final version to /mnt/user-data/outputs for sharing
-- Use proper headings and styles
-- Include tables for structured data
+**STEP 2: Create Document with Learned Knowledge**
+```json
+{
+  "thoughts": [
+    "Creating professional Word document following skill guidelines",
+    "Using proper heading hierarchy, styles, and formatting"
+  ],
+  "tool_name": "code_execution_tool",
+  "tool_args": {
+    "runtime": "python",
+    "code": "from docx import Document\nfrom docx.shared import Inches, Pt, RGBColor\nfrom docx.enum.text import WD_ALIGN_PARAGRAPH\n\n# Create document\ndoc = Document()\n\n# Title (Heading level 0)\ntitle = doc.add_heading('Document Title', 0)\ntitle.alignment = WD_ALIGN_PARAGRAPH.CENTER\n\n# Add sections with proper hierarchy\ndoc.add_heading('Section 1', level=1)\np = doc.add_paragraph('Content goes here...')\n\n# Tables (if needed)\ntable = doc.add_table(rows=3, cols=3)\ntable.style = 'Light Grid Accent 1'\n\n# Save to /root/\ndoc.save('/root/output.docx')\nprint('✅ Document created: /root/output.docx')"
+  }
+}
+```
+
+**WHEN TO USE:**
+- User requests: "create Word document", "write report", "make proposal"
+- Professional documents: reports, proposals, letters, resumes
+- Any .docx file needed
+
+**KEY LIBRARIES (pre-installed):**
+- `python-docx` for document creation
+- `from docx import Document`
+- `from docx.shared import Inches, Pt, RGBColor`
+- `from docx.enum.text import WD_ALIGN_PARAGRAPH`
+
+**FORMATTING CAPABILITIES:**
+- Headings (levels 0-9)
+- Bold, italic, underline text
+- Tables with styles
+- Images (using `doc.add_picture(path, width=Inches(2))`)
+- Headers/footers
+- Page breaks
+- Bullet/numbered lists
+
+**FILE LOCATION:**
+Always save to: `/root/filename.docx`
+
+**EXAMPLE - Security Report:**
+1. Read skill: Learn structure and formatting
+2. Create document with:
+   - Title page (heading level 0, centered)
+   - Executive summary (heading level 1)
+   - Findings table (3 columns: Vulnerability, Severity, Description)
+   - Detailed analysis (heading level 2 subsections)
+   - Recommendations (numbered list)
+   - Professional styling throughout
+
+**NEVER:**
+- Skip reading the skill file (results in amateur output)
+- Use docx_create as if it's a direct tool (it doesn't exist!)
+- Output only text without creating actual file
+- Create files outside /root/ directory
+
+**BEST PRACTICES FROM SKILL:**
+- Use heading hierarchy: 0 for title, 1 for main sections, 2-3 for subsections
+- Apply table styles for better appearance
+- Add page breaks between major sections
+- Use proper alignment (left for body, center for titles)
+- Include formatted lists for action items
+
+This tool uses code_execution_tool with Python runtime.
+Skills make output professional vs. generic AI-looking.

@@ -8,6 +8,8 @@
 
 {{ include "agent.system.skills.md" }}
 
+{{ include "agent.system.tools_catalog.md" }}
+
 {{ include "agent.system.main.communication.md" }}
 
 {{ include "agent.system.main.solving.md" }}

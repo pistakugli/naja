@@ -1,56 +1,25 @@
 ### calendar_event_create:
 
-Creates calendar events directly in user's calendar app. Use for scheduling meetings, appointments, reminders, or any time-based activities.
-Can create single events or recurring events (daily, weekly, monthly, yearly).
-Supports event details: title, description, location, attendees, reminders.
-Always check current time first using user_time tool to understand relative dates.
+Creates calendar events and reminders (output as .ics file).
 
-**When to use:**
-- User says "schedule", "add to calendar", "book time", "remind me"
-- Creating meetings or appointments
-- Setting up recurring events
-- Scheduling deliverables or deadlines
-
-**Usage - Simple event:**
+**WORKFLOW:**
 ```json
 {
-  "thoughts": ["User wants to schedule a meeting tomorrow at 2 PM"],
-  "headline": "Creating calendar event for team meeting",
-  "tool_name": "calendar_event_create",
+  "thoughts": ["Creating calendar event for meeting"],
+  "tool_name": "code_execution_tool",
   "tool_args": {
-    "new_events": [{
-      "title": "Team Meeting",
-      "start_time": "2026-01-15T14:00:00Z",
-      "end_time": "2026-01-15T15:00:00Z",
-      "event_description": "Weekly team sync",
-      "location": "Conference Room A"
-    }]
+    "runtime": "python",
+    "code": "from icalendar import Calendar, Event\nfrom datetime import datetime\n\ncal = Calendar()\nevent = Event()\nevent.add('summary', 'Meeting Title')\nevent.add('dtstart', datetime(2026, 1, 15, 14, 0, 0))\nevent.add('dtend', datetime(2026, 1, 15, 15, 0, 0))\nevent.add('description', 'Meeting description')\ncal.add_component(event)\n\nwith open('/root/event.ics', 'wb') as f:\n    f.write(cal.to_ical())\nprint('✅ Event created: /root/event.ics')"
   }
 }
 ```
 
-**Usage - Recurring event with reminders:**
-```json
-{
-  "thoughts": ["User wants weekly standup every Monday"],
-  "headline": "Creating recurring weekly standup",
-  "tool_name": "calendar_event_create",
-  "tool_args": {
-    "new_events": [{
-      "title": "Weekly Standup",
-      "start_time": "2026-01-20T09:00:00Z",
-      "end_time": "2026-01-20T09:30:00Z",
-      "recurrence": {
-        "frequency": "weekly",
-        "days_of_week": ["MO"],
-        "human_readable_frequency": "Every Monday",
-        "rrule": "FREQ=WEEKLY;BYDAY=MO"
-      },
-      "nudges": [{
-        "method": "notification",
-        "minutes_before": 15
-      }]
-    }]
-  }
-}
-```
+**WHEN TO USE:**
+- "Schedule meeting/event"
+- "Create calendar reminder"
+- Event creation requests
+
+**LIBRARY:**
+- `icalendar` for .ics file creation
+
+This uses code_execution_tool with Python runtime.

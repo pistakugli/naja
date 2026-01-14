@@ -1,0 +1,47 @@
+[Unit]
+Description=NAJA - Agent Zero AI System
+Documentation=https://github.com/pistakugli/naja
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=agent-zero
+Group=agent-zero
+WorkingDirectory=/home/agent-zero/naja
+
+# Environment
+Environment="PATH=/home/agent-zero/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Environment="PYTHONUNBUFFERED=1"
+Environment="AGENT_ZERO_HOME=/home/agent-zero"
+Environment="AGENT_WORKSPACE=/home/agent-zero/workspace"
+
+# Execute
+ExecStart=/usr/bin/python3 /home/agent-zero/naja/run_ui.py
+
+# Restart policy
+Restart=always
+RestartSec=10
+StartLimitInterval=200
+StartLimitBurst=5
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=agent-zero
+
+# Security (relaxed for AI agent with full system access)
+# Agent Zero needs full capabilities for system administration
+NoNewPrivileges=false
+PrivateTmp=false
+
+# Resource limits (adjust as needed)
+LimitNOFILE=65536
+LimitNPROC=4096
+
+# Timeouts
+TimeoutStartSec=60
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

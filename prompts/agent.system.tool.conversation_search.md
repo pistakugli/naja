@@ -1,37 +1,37 @@
 ### conversation_search:
 
-Searches through past conversations with the user to find relevant context and information.
-Use when user references past discussions or when historical context would improve the response.
-Claude's memories update periodically, so recent conversations may not yet be reflected.
+Searches past conversations and chat history by keywords.
 
-**When to use:**
-- User says "as we discussed", "you mentioned before", "what did we talk about"
-- User asks about past conversations or topics
-- References to "our conversation about X"
-- Questions about what Claude remembers
-- User assumes shared knowledge without context
-
-**Usage:**
+**WORKFLOW:**
 ```json
 {
-  "thoughts": ["User is asking about a topic we discussed before"],
-  "headline": "Searching past conversations about Python debugging",
-  "tool_name": "conversation_search",
+  "thoughts": ["Searching memory for previous discussions about topic"],
+  "tool_name": "memory_load",
   "tool_args": {
-    "query": "Python debugging breakpoints",
-    "max_results": 5
+    "query": "search keywords here"
   }
 }
 ```
 
+**WHEN TO USE:**
+- "What did we discuss about X?"
+- "Find previous conversation"
+- Retrieving past context
+
+**HOW IT WORKS:**
+Uses Agent Zero's built-in memory_load tool with search query.
+Searches through conversation history and saved memories.
+
+**EXAMPLE:**
+User: "What did we discuss about SQL injection?"
 ```json
 {
-  "thoughts": ["User wants to know what we discussed about their project"],
-  "headline": "Finding previous project discussions",
-  "tool_name": "conversation_search",
+  "thoughts": ["Searching memory for SQL injection discussions"],
+  "tool_name": "memory_load",
   "tool_args": {
-    "query": "machine learning project dataset",
-    "max_results": 10
+    "query": "SQL injection"
   }
 }
 ```
+
+This uses existing memory_load tool.

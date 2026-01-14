@@ -5,6 +5,7 @@
 [![Agent Zero](https://img.shields.io/badge/based%20on-Agent%20Zero-blue.svg)](https://github.com/frdel/agent-zero)
 [![Kali Tools](https://img.shields.io/badge/kali%20tools-58-red.svg)](docs/TOOL_REFERENCE.md)
 [![Status](https://img.shields.io/badge/status-active-green.svg)](https://github.com/pistakugli/naja)
+[![Fixed](https://img.shields.io/badge/Agent%20Zero%20%23803-fixed-brightgreen.svg)](https://github.com/agent0ai/agent-zero/issues/803)
 
 NAJA je [Agent Zero](https://github.com/frdel/agent-zero) fork sa integriranim Kali Linux penetration testing alatima. Agent Zero pruža AI reasoning framework, a ja sam dodao 58 profesionalnih security tools.
 
@@ -16,6 +17,18 @@ NAJA je [Agent Zero](https://github.com/frdel/agent-zero) fork sa integriranim K
 - 🛠️ **58 Kali Tools** - Professional penetration testing arsenal  
 - 📝 **Auto Reporting** - Generate professional security reports
 - 🔒 **Authorization Checks** - Built-in legal compliance
+
+## 🆕 Latest Updates (2026-01-14)
+
+**✅ Fixed Agent Zero Issue #803**
+- Resolved `AttributeError: '_auth_server_provider'` bug
+- Updated for fastmcp 2.3.4 compatibility
+- Added missing `openai` dependency
+
+**✅ RFC Configuration Added**
+- Remote Function Call support for development instances
+- Secure communication between production/development
+- See [RFC_SETUP.md](RFC_SETUP.md) for details
 
 ## 📦 Šta je uključeno?
 
@@ -65,21 +78,64 @@ NAJA je [Agent Zero](https://github.com/frdel/agent-zero) fork sa integriranim K
 
 ## 🚀 Quick Start
 
+### Standard Setup
+
 ```bash
 # Clone repo
 git clone https://github.com/pistakugli/naja.git
 cd naja
 
-# Docker (recommended)
-docker build -t naja .
-docker run -it -p 50001:50001 naja
+# Setup environment
+cp .env.example .env
+# Edit .env and add your API keys
 
-# Ili local
+# Install dependencies
 pip install -r requirements.txt
+
+# Run
 python run_ui.py
 ```
 
 Otvori browser: `http://localhost:50001`
+
+### Docker Setup
+
+```bash
+# Docker (recommended)
+docker build -t naja .
+docker run -it -p 50001:50001 naja
+```
+
+### Development Instance (RFC)
+
+**For advanced debugging with separate development environment:**
+
+```bash
+# See detailed RFC setup guide
+cat RFC_SETUP.md
+
+# Quick setup:
+# 1. Set RFC_PASSWORD in .env
+# 2. Run development instance (Docker or local)
+# 3. Configure in settings
+```
+
+**[→ Complete RFC Guide](RFC_SETUP.md)**
+
+## ⚙️ Configuration
+
+### Required (.env file)
+```bash
+ANTHROPIC_API_KEY=your-key-here
+DEFAULT_MODEL=anthropic/claude-sonnet-4-20250514
+```
+
+### Optional (RFC for development)
+```bash
+RFC_PASSWORD=your-secure-password
+```
+
+See [.env.example](.env.example) for complete configuration.
 
 ## 💬 Primer korišćenja
 
@@ -158,6 +214,7 @@ NAJA: [Uses both Agent Zero & Kali tools]
 | [Tool Reference](docs/TOOL_REFERENCE.md) | Svi 58 Kali tools |
 | [Workflows](docs/WORKFLOW_EXAMPLES.md) | Primeri autonomous testing |
 | [Kali Guide](docs/KALI_TOOLS_GUIDE.md) | Detaljni integration guide |
+| **[RFC Setup](RFC_SETUP.md)** | Development instance configuration |
 
 ## 🔒 Legal & Authorization
 
@@ -185,6 +242,22 @@ NAJA: [Uses both Agent Zero & Kali tools]
 - Wireless security
 - Digital forensics
 
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**AttributeError: '_auth_server_provider'**
+- ✅ Fixed in latest version (commit 9c05182)
+- Update: `git pull && pip install -r requirements.txt`
+
+**ModuleNotFoundError: No module named 'openai'**
+- ✅ Fixed in requirements.txt (commit c5c8b40)
+- Install: `pip install -r requirements.txt`
+
+**"No RFC password" warning**
+- ℹ️ Optional feature for development instances
+- See [RFC_SETUP.md](RFC_SETUP.md) or ignore if not needed
+
 ## 🤝 Contributing
 
 Dodavanje novih Kali tools:
@@ -203,6 +276,7 @@ Kali Integration:      58 tools (added)
 Total Tools:           86 security + AI tools
 Documentation:         90+ prompt files
 Status:                Active development
+Fixes:                 Agent Zero #803 resolved
 ```
 
 ## 🙏 Credits
@@ -225,4 +299,4 @@ Status:                Active development
 
 *AI Reasoning Framework meets Professional Security Tools*
 
-[Get Started](docs/QUICKSTART.md) | [Documentation](docs/) | [Tool Reference](docs/TOOL_REFERENCE.md)
+[Get Started](docs/QUICKSTART.md) | [Documentation](docs/) | [Tool Reference](docs/TOOL_REFERENCE.md) | [RFC Setup](RFC_SETUP.md)

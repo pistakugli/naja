@@ -1,37 +1,22 @@
 ### calendar_search:
 
-Searches user's calendar events within a time range. Use to check schedule, find meetings, or see what's planned.
-Can filter by calendar, date range, and event type.
-Returns event details including title, time, location, attendees.
+Searches and retrieves calendar events (from .ics files).
 
-**When to use:**
-- "What's on my calendar today/this week?"
-- "Do I have any meetings tomorrow?"
-- "Show me my schedule"
-- "When is my next appointment?"
-
-**Usage:**
+**WORKFLOW:**
 ```json
 {
-  "thoughts": ["User wants to see their schedule for today"],
-  "headline": "Checking calendar for today's events",
-  "tool_name": "calendar_search",
+  "thoughts": ["Searching for calendar events"],
+  "tool_name": "code_execution_tool",
   "tool_args": {
-    "start_time": "2026-01-14T00:00:00Z",
-    "end_time": "2026-01-14T23:59:59Z",
-    "limit": 50
+    "runtime": "python",
+    "code": "from icalendar import Calendar\nfrom datetime import datetime\n\n# Read calendar file\nwith open('calendar.ics', 'rb') as f:\n    cal = Calendar.from_ical(f.read())\n\n# Search events\nfor component in cal.walk():\n    if component.name == 'VEVENT':\n        print(f\"Event: {component.get('summary')}\")\n        print(f\"Date: {component.get('dtstart').dt}\")"
   }
 }
 ```
 
-```json
-{
-  "thoughts": ["User wants to check if they're free tomorrow afternoon"],
-  "headline": "Searching calendar for tomorrow afternoon",
-  "tool_name": "calendar_search",
-  "tool_args": {
-    "start_time": "2026-01-15T12:00:00Z",
-    "end_time": "2026-01-15T18:00:00Z"
-  }
-}
-```
+**WHEN TO USE:**
+- "What's on my calendar?"
+- "Find events"
+- Calendar queries
+
+This uses code_execution_tool with Python runtime.

@@ -1,0 +1,596 @@
+{
+  "tools_catalog": {
+    "version": "1.0",
+    "total_tools": 90,
+    "categories": {
+      "agent_zero": 20,
+      "security": 58,
+      "productivity": 12
+    },
+    
+    "agent_zero_tools": [
+      {
+        "name": "code_execution_tool",
+        "category": "core",
+        "description": "Execute Python, Node.js, or terminal commands in isolated sessions. Main tool for running code and system commands.",
+        "location": "python/tools/code_execution_tool.py",
+        "runtimes": ["python", "nodejs", "terminal", "output"],
+        "use_cases": [
+          "Running Python scripts",
+          "Executing shell commands",
+          "Installing packages",
+          "File operations"
+        ],
+        "key_features": [
+          "Multiple runtime support",
+          "Session management",
+          "Output streaming",
+          "Timeout handling"
+        ]
+      },
+      {
+        "name": "call_subordinate",
+        "category": "reasoning",
+        "description": "Delegate tasks to specialized subordinate agents with different prompt profiles",
+        "location": "python/tools/call_subordinate.py",
+        "use_cases": [
+          "Task delegation",
+          "Specialized subtasks",
+          "Parallel processing"
+        ]
+      },
+      {
+        "name": "memory_save",
+        "category": "memory",
+        "description": "Save information to long-term memory for future retrieval",
+        "location": "python/tools/memory_save.py",
+        "use_cases": [
+          "Storing important facts",
+          "User preferences",
+          "Context preservation"
+        ]
+      },
+      {
+        "name": "memory_load",
+        "category": "memory",
+        "description": "Load and search through saved memories",
+        "location": "python/tools/memory_load.py",
+        "use_cases": [
+          "Retrieving past information",
+          "Context recall",
+          "Knowledge lookup"
+        ]
+      },
+      {
+        "name": "memory_forget",
+        "category": "memory",
+        "description": "Remove specific memories from storage",
+        "location": "python/tools/memory_forget.py"
+      },
+      {
+        "name": "memory_delete",
+        "category": "memory",
+        "description": "Delete memory entries",
+        "location": "python/tools/memory_delete.py"
+      },
+      {
+        "name": "web_search",
+        "category": "research",
+        "description": "Search the web using search engines",
+        "location": "python/tools/search_engine.py",
+        "use_cases": [
+          "Finding current information",
+          "Research queries",
+          "Fact checking"
+        ]
+      },
+      {
+        "name": "web_fetch",
+        "category": "research",
+        "description": "Fetch and read content from specific URLs",
+        "location": "python/tools/web_fetch.py",
+        "use_cases": [
+          "Reading articles",
+          "Downloading pages",
+          "Content extraction"
+        ]
+      },
+      {
+        "name": "github_search",
+        "category": "research",
+        "description": "Search GitHub repositories, code, issues, and users",
+        "location": "python/tools/github_search.py",
+        "use_cases": [
+          "Finding code examples",
+          "Repository search",
+          "Issue tracking"
+        ]
+      },
+      {
+        "name": "file_viewer",
+        "category": "files",
+        "description": "View file contents and directory listings",
+        "location": "python/tools/file_viewer.py"
+      },
+      {
+        "name": "file_editor",
+        "category": "files",
+        "description": "Edit files using search and replace",
+        "location": "python/tools/file_editor.py"
+      },
+      {
+        "name": "file_creator",
+        "category": "files",
+        "description": "Create new files with content",
+        "location": "python/tools/file_creator.py"
+      },
+      {
+        "name": "response",
+        "category": "communication",
+        "description": "Send responses to the user",
+        "location": "python/tools/response.py"
+      },
+      {
+        "name": "input",
+        "category": "communication",
+        "description": "Request input from the user",
+        "location": "python/tools/input.py"
+      },
+      {
+        "name": "notify_user",
+        "category": "communication",
+        "description": "Send notifications to the user",
+        "location": "python/tools/notify_user.py"
+      },
+      {
+        "name": "message_compose",
+        "category": "communication",
+        "description": "Compose messages and emails",
+        "location": "python/tools/message_compose.py"
+      },
+      {
+        "name": "a2a_chat",
+        "category": "communication",
+        "description": "Communicate with other FastA2A-compatible agents",
+        "location": "python/tools/a2a_chat.py"
+      },
+      {
+        "name": "behaviour_adjustment",
+        "category": "core",
+        "description": "Adjust agent behavior and settings",
+        "location": "python/tools/behaviour_adjustment.py"
+      },
+      {
+        "name": "wait",
+        "category": "utility",
+        "description": "Wait for a specified duration",
+        "location": "python/tools/wait.py"
+      },
+      {
+        "name": "unknown",
+        "category": "utility",
+        "description": "Handle unknown tool calls",
+        "location": "python/tools/unknown.py"
+      }
+    ],
+    
+    "kali_security_tools": [
+      {
+        "name": "nmap",
+        "category": "reconnaissance",
+        "description": "Network scanner for host discovery, port scanning, and service detection",
+        "location": "python/tools/nmap_scanner.py",
+        "prompt_location": "prompts/agent.system.tool.nmap.md",
+        "use_cases": [
+          "Port scanning",
+          "Service detection",
+          "OS fingerprinting",
+          "Network mapping"
+        ],
+        "common_flags": [
+          "-sV (service version detection)",
+          "-sC (default scripts)",
+          "-p- (all ports)",
+          "-T4 (timing template)"
+        ]
+      },
+      {
+        "name": "nikto",
+        "category": "web_scanning",
+        "description": "Web server vulnerability scanner",
+        "location": "python/tools/nikto_scanner.py",
+        "prompt_location": "prompts/agent.system.tool.nikto.md",
+        "use_cases": [
+          "Web server scanning",
+          "Vulnerability detection",
+          "Configuration checks"
+        ]
+      },
+      {
+        "name": "sqlmap",
+        "category": "exploitation",
+        "description": "Automatic SQL injection and database takeover tool",
+        "location": "python/tools/sqlmap_tool.py",
+        "prompt_location": "prompts/agent.system.tool.sqlmap.md",
+        "use_cases": [
+          "SQL injection testing",
+          "Database enumeration",
+          "Data extraction"
+        ]
+      },
+      {
+        "name": "metasploit",
+        "category": "exploitation",
+        "description": "Penetration testing framework for exploit development and execution",
+        "location": "python/tools/metasploit_tool.py",
+        "prompt_location": "prompts/agent.system.tool.metasploit.md",
+        "use_cases": [
+          "Exploit execution",
+          "Payload generation",
+          "Post-exploitation"
+        ]
+      },
+      {
+        "name": "hydra",
+        "category": "password_cracking",
+        "description": "Fast network login cracker supporting many protocols",
+        "location": "python/tools/hydra_tool.py",
+        "prompt_location": "prompts/agent.system.tool.hydra.md",
+        "protocols": ["ssh", "ftp", "http", "smb", "rdp", "etc"]
+      },
+      {
+        "name": "john",
+        "category": "password_cracking",
+        "description": "John the Ripper password cracker",
+        "location": "python/tools/john_tool.py",
+        "prompt_location": "prompts/agent.system.tool.john.md",
+        "use_cases": [
+          "Password hash cracking",
+          "Dictionary attacks",
+          "Brute force"
+        ]
+      },
+      {
+        "name": "aircrack",
+        "category": "wireless",
+        "description": "WiFi security auditing tools suite",
+        "location": "python/tools/aircrack_tool.py",
+        "prompt_location": "prompts/agent.system.tool.aircrack.md",
+        "use_cases": [
+          "WEP/WPA cracking",
+          "Packet capture",
+          "Network monitoring"
+        ]
+      },
+      {
+        "name": "gobuster",
+        "category": "web_scanning",
+        "description": "Directory and file brute-forcing tool",
+        "location": "python/tools/gobuster_tool.py",
+        "prompt_location": "prompts/agent.system.tool.gobuster.md",
+        "use_cases": [
+          "Directory enumeration",
+          "Subdomain discovery",
+          "Virtual host enumeration"
+        ]
+      },
+      {
+        "name": "kali_universal",
+        "category": "universal",
+        "description": "Universal wrapper for 600+ Kali Linux security tools",
+        "location": "python/tools/kali_security_tool.py",
+        "prompt_location": "prompts/agent.system.tool.kali_security.md",
+        "note": "Provides access to all Kali tools not explicitly wrapped",
+        "supported_tools": "600+ tools including burpsuite, wireshark, zap, hashcat, etc."
+      }
+    ],
+    
+    "claude_productivity_tools": [
+      {
+        "name": "docx_create",
+        "category": "document_creation",
+        "description": "Create professional Microsoft Word documents with formatting, tables, images, and styles",
+        "location": "prompts/agent.system.tool.docx_create.md",
+        "skill_required": "/home/claude/naja/skills/public/docx/SKILL.md",
+        "workflow": [
+          "Read docx skill file",
+          "Learn professional formatting best practices",
+          "Execute Python code with python-docx library",
+          "Apply learned techniques",
+          "Save to /root/filename.docx"
+        ],
+        "libraries": ["python-docx"],
+        "use_cases": [
+          "Security reports",
+          "Business proposals",
+          "Technical documentation",
+          "Professional letters"
+        ],
+        "output_quality": "Professional enterprise-grade documents",
+        "execution_method": "code_execution_tool with Python runtime"
+      },
+      {
+        "name": "pptx_create",
+        "category": "document_creation",
+        "description": "Create PowerPoint presentations with professional layouts and design",
+        "location": "prompts/agent.system.tool.pptx_create.md",
+        "skill_required": "/home/claude/naja/skills/public/pptx/SKILL.md",
+        "workflow": [
+          "Read pptx skill file",
+          "Learn presentation design principles",
+          "Execute Python code with python-pptx library",
+          "Create slides with proper layouts",
+          "Save to /root/filename.pptx"
+        ],
+        "libraries": ["python-pptx"],
+        "use_cases": [
+          "Security briefings",
+          "Training materials",
+          "Executive presentations",
+          "Project pitches"
+        ],
+        "slide_layouts": {
+          "0": "Title slide",
+          "1": "Title and content",
+          "5": "Title only",
+          "6": "Blank"
+        },
+        "execution_method": "code_execution_tool with Python runtime"
+      },
+      {
+        "name": "xlsx_create",
+        "category": "document_creation",
+        "description": "Create Excel spreadsheets with formulas, formatting, and data analysis",
+        "location": "prompts/agent.system.tool.xlsx_create.md",
+        "skill_required": "/home/claude/naja/skills/public/xlsx/SKILL.md",
+        "workflow": [
+          "Read xlsx skill file",
+          "Learn spreadsheet best practices",
+          "Execute Python code with openpyxl library",
+          "Add formulas and formatting",
+          "Save to /root/filename.xlsx"
+        ],
+        "libraries": ["openpyxl", "pandas (optional)"],
+        "use_cases": [
+          "Vulnerability tracking sheets",
+          "Financial analysis",
+          "Data dashboards",
+          "Calculation templates"
+        ],
+        "features": [
+          "Excel formulas (SUM, AVERAGE, IF, VLOOKUP)",
+          "Conditional formatting",
+          "Charts and graphs",
+          "Data validation"
+        ],
+        "execution_method": "code_execution_tool with Python runtime"
+      },
+      {
+        "name": "pdf_create",
+        "category": "document_creation",
+        "description": "Create PDF documents or fill interactive PDF forms",
+        "location": "prompts/agent.system.tool.pdf_create.md",
+        "skill_required": "/home/claude/naja/skills/public/pdf/SKILL.md",
+        "workflow": [
+          "Read pdf skill file",
+          "Choose mode: create or fill form",
+          "Execute appropriate Python library",
+          "Save to /root/filename.pdf"
+        ],
+        "libraries": ["reportlab (creation)", "PyPDF2 (manipulation)", "fillpdf (forms)"],
+        "use_cases": [
+          "Final deliverable documents",
+          "Form completion",
+          "Report generation",
+          "Document conversion"
+        ],
+        "modes": {
+          "create": "Build PDF from scratch with reportlab",
+          "fill": "Fill interactive PDF forms"
+        },
+        "execution_method": "code_execution_tool with Python runtime"
+      },
+      {
+        "name": "web_ui_create",
+        "category": "design",
+        "description": "Create web interfaces with React, HTML, and professional design",
+        "location": "prompts/agent.system.tool.web_ui_create.md",
+        "skill_required": "/home/claude/naja/skills/public/frontend-design/SKILL.md",
+        "workflow": [
+          "Read frontend-design skill file",
+          "Learn non-generic design patterns",
+          "Create HTML or React code",
+          "Apply distinctive styling",
+          "Save to /root/interface.html or .jsx"
+        ],
+        "frameworks": ["React", "HTML + Tailwind CSS", "JavaScript"],
+        "use_cases": [
+          "Security dashboards",
+          "Admin panels",
+          "Landing pages",
+          "Web applications"
+        ],
+        "design_principles": [
+          "Avoid generic AI aesthetics",
+          "Distinctive design patterns",
+          "Professional layouts",
+          "Responsive design"
+        ],
+        "execution_method": "code_execution_tool with terminal runtime"
+      },
+      {
+        "name": "visual_art_create",
+        "category": "design",
+        "description": "Create visual artwork, posters, and graphics using design philosophy",
+        "location": "prompts/agent.system.tool.visual_art_create.md",
+        "skill_required": "/home/claude/naja/skills/examples/canvas-design/SKILL.md",
+        "workflow": [
+          "Read canvas-design skill file",
+          "Learn visual art principles",
+          "Execute Python imaging code",
+          "Apply composition and color theory",
+          "Save to /root/artwork.png"
+        ],
+        "libraries": ["PIL/Pillow", "SVG", "p5.js (for generative art)"],
+        "use_cases": [
+          "Posters and graphics",
+          "Infographics",
+          "Visual presentations",
+          "Original artwork"
+        ],
+        "design_principles": [
+          "Original work (no copying)",
+          "Proper composition",
+          "Color theory",
+          "Typography"
+        ],
+        "execution_method": "code_execution_tool with Python runtime"
+      },
+      {
+        "name": "chart_display",
+        "category": "data_visualization",
+        "description": "Create charts and graphs for data visualization",
+        "location": "prompts/agent.system.tool.chart_display.md",
+        "workflow": [
+          "Prepare data",
+          "Choose chart type",
+          "Execute matplotlib or plotly code",
+          "Save to /root/chart.png"
+        ],
+        "libraries": ["matplotlib", "plotly", "seaborn"],
+        "chart_types": [
+          "Line charts (trends)",
+          "Bar charts (comparisons)",
+          "Pie charts (proportions)",
+          "Scatter plots (correlations)",
+          "Heatmaps (2D data)"
+        ],
+        "use_cases": [
+          "Vulnerability distribution charts",
+          "Progress tracking",
+          "Data trends",
+          "Statistical visualizations"
+        ],
+        "execution_method": "code_execution_tool with Python runtime"
+      },
+      {
+        "name": "calendar_event_create",
+        "category": "productivity",
+        "description": "Create calendar events and reminders as .ics files",
+        "location": "prompts/agent.system.tool.calendar_event_create.md",
+        "workflow": [
+          "Define event details",
+          "Execute Python with icalendar library",
+          "Save to /root/event.ics"
+        ],
+        "libraries": ["icalendar"],
+        "use_cases": [
+          "Meeting scheduling",
+          "Reminders",
+          "Event planning"
+        ],
+        "execution_method": "code_execution_tool with Python runtime"
+      },
+      {
+        "name": "calendar_search",
+        "category": "productivity",
+        "description": "Search and retrieve calendar events from .ics files",
+        "location": "prompts/agent.system.tool.calendar_search.md",
+        "workflow": [
+          "Read .ics file",
+          "Parse events with icalendar",
+          "Search and filter"
+        ],
+        "libraries": ["icalendar"],
+        "execution_method": "code_execution_tool with Python runtime"
+      },
+      {
+        "name": "conversation_search",
+        "category": "memory",
+        "description": "Search past conversations by keywords",
+        "location": "prompts/agent.system.tool.conversation_search.md",
+        "workflow": [
+          "Use memory_load tool with search query",
+          "Retrieve matching conversations"
+        ],
+        "use_cases": [
+          "Finding past discussions",
+          "Context retrieval",
+          "Knowledge lookup"
+        ],
+        "execution_method": "Uses existing memory_load tool"
+      },
+      {
+        "name": "recent_chats",
+        "category": "memory",
+        "description": "Retrieve recent conversation history",
+        "location": "prompts/agent.system.tool.recent_chats.md",
+        "workflow": [
+          "Use chat_history tool",
+          "Return recent messages"
+        ],
+        "use_cases": [
+          "Reviewing recent context",
+          "Conversation continuity"
+        ],
+        "execution_method": "Uses existing chat_history tool"
+      },
+      {
+        "name": "memory_edit",
+        "category": "memory",
+        "description": "Save or update information in long-term memory",
+        "location": "prompts/agent.system.tool.memory_edit.md",
+        "workflow": [
+          "Use memory_save tool with title and content",
+          "Store in memory database"
+        ],
+        "use_cases": [
+          "Storing important information",
+          "User preferences",
+          "Context for future conversations"
+        ],
+        "execution_method": "Uses existing memory_save tool"
+      }
+    ],
+    
+    "usage_instructions": {
+      "agent_zero_tools": {
+        "description": "Core AI reasoning and system tools",
+        "primary_tool": "code_execution_tool - Used for running all code and commands",
+        "when_to_use": "For general AI tasks, file operations, research, and memory management"
+      },
+      "kali_security_tools": {
+        "description": "Security testing and penetration testing tools",
+        "authorization_required": "Always check authorization before scanning",
+        "when_to_use": "For security assessments, vulnerability scanning, and pentesting",
+        "note": "58 specialized security tools + 600+ via kali_universal wrapper"
+      },
+      "claude_productivity_tools": {
+        "description": "Professional document creation and design tools",
+        "critical_workflow": "ALWAYS read corresponding skill file BEFORE using tool",
+        "skills_location": "/home/claude/naja/skills/",
+        "when_to_use": "When user needs professional documents, presentations, or designs",
+        "quality_difference": {
+          "without_skills": "Generic AI-looking output",
+          "with_skills": "Professional expert-level work"
+        },
+        "execution_method": "All use code_execution_tool as primary mechanism"
+      }
+    },
+    
+    "tool_integration": {
+      "auto_detection": "Agent Zero automatically scans prompts/agent.system.tool.*.md files",
+      "total_prompts": 90,
+      "categories_distribution": {
+        "Agent Zero": "20 tools (core AI functionality)",
+        "Kali Linux": "58 tools (security testing)",
+        "Claude AI": "12 tools (productivity and documents)"
+      },
+      "system_prompt_integration": {
+        "tools_variable": "{{tools}} populated from all .md files",
+        "skills_variable": "{{skills_catalog}} populated from skills.json",
+        "combined_system": "Complete AI platform with reasoning + security + productivity"
+      }
+    }
+  }
+}

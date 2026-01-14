@@ -6,6 +6,8 @@
 
 {{ include "agent.system.claude_capabilities.md" }}
 
+{{ include "agent.system.skills.md" }}
+
 {{ include "agent.system.main.communication.md" }}
 
 {{ include "agent.system.main.solving.md" }}

@@ -4,17 +4,21 @@
     "total_tools": 90,
     "categories": {
       "agent_zero": 20,
-      "security": 58,
+      "security": "600+",
       "productivity": 12
     },
-    
     "agent_zero_tools": [
       {
         "name": "code_execution_tool",
         "category": "core",
         "description": "Execute Python, Node.js, or terminal commands in isolated sessions. Main tool for running code and system commands.",
         "location": "python/tools/code_execution_tool.py",
-        "runtimes": ["python", "nodejs", "terminal", "output"],
+        "runtimes": [
+          "python",
+          "nodejs",
+          "terminal",
+          "output"
+        ],
         "use_cases": [
           "Running Python scripts",
           "Executing shell commands",
@@ -173,7 +177,6 @@
         "location": "python/tools/unknown.py"
       }
     ],
-    
     "kali_security_tools": [
       {
         "name": "nmap",
@@ -236,7 +239,14 @@
         "description": "Fast network login cracker supporting many protocols",
         "location": "python/tools/hydra_tool.py",
         "prompt_location": "prompts/agent.system.tool.hydra.md",
-        "protocols": ["ssh", "ftp", "http", "smb", "rdp", "etc"]
+        "protocols": [
+          "ssh",
+          "ftp",
+          "http",
+          "smb",
+          "rdp",
+          "etc"
+        ]
       },
       {
         "name": "john",
@@ -277,14 +287,15 @@
       {
         "name": "kali_universal",
         "category": "universal",
-        "description": "Universal wrapper for 600+ Kali Linux security tools",
+        "description": "Universal unrestricted wrapper for ALL Kali Linux security tools - no whitelist, no blacklist",
         "location": "python/tools/kali_security_tool.py",
         "prompt_location": "prompts/agent.system.tool.kali_security.md",
-        "note": "Provides access to all Kali tools not explicitly wrapped",
-        "supported_tools": "600+ tools including burpsuite, wireshark, zap, hashcat, etc."
+        "note": "FULL ACCESS: Can execute ANY tool installed on Kali Linux. No restrictions.",
+        "supported_tools": "600+ tools: burpsuite, wireshark, zaproxy, ettercap, beef, set, wifite, netcat, socat, proxychains, hashid, binwalk, foremost, volatility, responder, mimikatz, empire, cobalt strike, and ALL other Kali tools",
+        "access_level": "UNRESTRICTED",
+        "restrictions": "None - full Kali Linux arsenal available"
       }
     ],
-    
     "claude_productivity_tools": [
       {
         "name": "docx_create",
@@ -299,7 +310,9 @@
           "Apply learned techniques",
           "Save to /root/filename.docx"
         ],
-        "libraries": ["python-docx"],
+        "libraries": [
+          "python-docx"
+        ],
         "use_cases": [
           "Security reports",
           "Business proposals",
@@ -322,7 +335,9 @@
           "Create slides with proper layouts",
           "Save to /root/filename.pptx"
         ],
-        "libraries": ["python-pptx"],
+        "libraries": [
+          "python-pptx"
+        ],
         "use_cases": [
           "Security briefings",
           "Training materials",
@@ -350,7 +365,10 @@
           "Add formulas and formatting",
           "Save to /root/filename.xlsx"
         ],
-        "libraries": ["openpyxl", "pandas (optional)"],
+        "libraries": [
+          "openpyxl",
+          "pandas (optional)"
+        ],
         "use_cases": [
           "Vulnerability tracking sheets",
           "Financial analysis",
@@ -377,7 +395,11 @@
           "Execute appropriate Python library",
           "Save to /root/filename.pdf"
         ],
-        "libraries": ["reportlab (creation)", "PyPDF2 (manipulation)", "fillpdf (forms)"],
+        "libraries": [
+          "reportlab (creation)",
+          "PyPDF2 (manipulation)",
+          "fillpdf (forms)"
+        ],
         "use_cases": [
           "Final deliverable documents",
           "Form completion",
@@ -403,7 +425,11 @@
           "Apply distinctive styling",
           "Save to /root/interface.html or .jsx"
         ],
-        "frameworks": ["React", "HTML + Tailwind CSS", "JavaScript"],
+        "frameworks": [
+          "React",
+          "HTML + Tailwind CSS",
+          "JavaScript"
+        ],
         "use_cases": [
           "Security dashboards",
           "Admin panels",
@@ -431,7 +457,11 @@
           "Apply composition and color theory",
           "Save to /root/artwork.png"
         ],
-        "libraries": ["PIL/Pillow", "SVG", "p5.js (for generative art)"],
+        "libraries": [
+          "PIL/Pillow",
+          "SVG",
+          "p5.js (for generative art)"
+        ],
         "use_cases": [
           "Posters and graphics",
           "Infographics",
@@ -457,7 +487,11 @@
           "Execute matplotlib or plotly code",
           "Save to /root/chart.png"
         ],
-        "libraries": ["matplotlib", "plotly", "seaborn"],
+        "libraries": [
+          "matplotlib",
+          "plotly",
+          "seaborn"
+        ],
         "chart_types": [
           "Line charts (trends)",
           "Bar charts (comparisons)",
@@ -483,7 +517,9 @@
           "Execute Python with icalendar library",
           "Save to /root/event.ics"
         ],
-        "libraries": ["icalendar"],
+        "libraries": [
+          "icalendar"
+        ],
         "use_cases": [
           "Meeting scheduling",
           "Reminders",
@@ -501,7 +537,9 @@
           "Parse events with icalendar",
           "Search and filter"
         ],
-        "libraries": ["icalendar"],
+        "libraries": [
+          "icalendar"
+        ],
         "execution_method": "code_execution_tool with Python runtime"
       },
       {
@@ -552,7 +590,6 @@
         "execution_method": "Uses existing memory_save tool"
       }
     ],
-    
     "usage_instructions": {
       "agent_zero_tools": {
         "description": "Core AI reasoning and system tools",
@@ -577,7 +614,6 @@
         "execution_method": "All use code_execution_tool as primary mechanism"
       }
     },
-    
     "tool_integration": {
       "auto_detection": "Agent Zero automatically scans prompts/agent.system.tool.*.md files",
       "total_prompts": 90,

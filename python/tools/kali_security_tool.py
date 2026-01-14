@@ -23,6 +23,7 @@ class KaliSecurityTool(Tool):
         tool_args = self.args.get("args", [])
         target = self.args.get("target", "")
         timeout = int(self.args.get("timeout", 300))
+        auto_install = self.args.get("auto_install", True)  # Auto-install if tool not found
         
         # Validation
         if not tool_name:
@@ -30,6 +31,18 @@ class KaliSecurityTool(Tool):
                 message="Error: 'tool' parameter required.\n\nExamples:\n  - nmap\n  - burpsuite\n  - wireshark\n  - sqlmap\n  - metasploit\n  - Any Kali tool name",
                 break_loop=False
             )
+        
+        # Check if tool is installed
+        tool_exists = await self._check_tool_exists(tool_name)
+        
+        if not tool_exists and auto_install:
+            # Try to auto-install the tool
+            install_result = await self._auto_install_tool(tool_name)
+            if not install_result:
+                return Response(
+                    message=f"Error: Tool '{tool_name}' not found and auto-install failed.\n\nTry manual installation:\n  sudo apt-get install {tool_name}",
+                    break_loop=False
+                )
         
         # Security warning
         warning = """
@@ -97,3 +110,56 @@ User assumes all legal responsibility.
         except asyncio.TimeoutError:
             process.kill()
             raise subprocess.TimeoutExpired(command, timeout)
+    
+    async def _check_tool_exists(self, tool_name):
+        """Check if tool is installed"""
+        try:
+            process = await asyncio.create_subprocess_shell(
+                f"which {tool_name}",
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE
+            )
+            stdout, stderr = await process.communicate()
+            return process.returncode == 0
+        except:
+            return False
+    
+    async def _auto_install_tool(self, tool_name):
+        """Attempt to auto-install missing tool"""
+        try:
+            # Try apt-get first
+            process = await asyncio.create_subprocess_shell(
+                f"sudo apt-get install -y -qq {tool_name}",
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE
+            )
+            await asyncio.wait_for(process.communicate(), timeout=300)
+            
+            if process.returncode == 0:
+                return True
+            
+            # If apt-get failed, try common alternatives
+            alternatives = {
+                'wireshark': 'wireshark-gtk',
+                'tshark': 'wireshark',
+                'ettercap': 'ettercap-text-only',
+                'john': 'john',
+                'hashcat': 'hashcat',
+                'beef': 'beef-xss',
+            }
+            
+            if tool_name in alternatives:
+                alt_tool = alternatives[tool_name]
+                process = await asyncio.create_subprocess_shell(
+                    f"sudo apt-get install -y -qq {alt_tool}",
+                    stdout=asyncio.subprocess.PIPE,
+                    stderr=asyncio.subprocess.PIPE
+                )
+                await asyncio.wait_for(process.communicate(), timeout=300)
+                return process.returncode == 0
+            
+            return False
+            
+        except:
+            return False
+

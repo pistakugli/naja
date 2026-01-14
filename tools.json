@@ -1,9 +1,9 @@
 {
   "tools_catalog": {
     "version": "1.0",
-    "total_tools": 90,
+    "total_tools": 91,
     "categories": {
-      "agent_zero": 20,
+      "agent_zero": 21,
       "security": "600+",
       "productivity": 12
     },
@@ -175,6 +175,32 @@
         "category": "utility",
         "description": "Handle unknown tool calls",
         "location": "python/tools/unknown.py"
+      },
+      {
+        "name": "system_admin",
+        "category": "system",
+        "description": "System administration with root/sudo privileges for full system control",
+        "location": "python/tools/system_admin_tool.py",
+        "prompt_location": "prompts/agent.system.tool.system_admin.md",
+        "use_cases": [
+          "Package management (apt, dnf, pacman)",
+          "Service management (systemctl)",
+          "User/group administration",
+          "Network configuration (iptables, firewall)",
+          "Disk management",
+          "Kali tools requiring root",
+          "System maintenance and updates"
+        ],
+        "key_features": [
+          "Root/sudo privilege escalation",
+          "UNRESTRICTED system access",
+          "Direct hardware access",
+          "Full firewall control",
+          "Service management",
+          "User management"
+        ],
+        "access_level": "ROOT/ADMINISTRATOR",
+        "critical_warning": "Can modify/delete ANY system file. Use with EXTREME caution."
       }
     ],
     "kali_security_tools": [

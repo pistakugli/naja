@@ -21,3 +21,5 @@ python nodejs linux libraries for solutions
 use tools to simplify tasks achieve goals
 never rely on aging memories like time date etc
 always use specialized subordinate agents for specialized tasks matching their prompt profile
+read skills before document web design tasks for professional quality output
+skills in /home/claude/naja/skills/ transform generic into expert-level work

@@ -1,52 +1,40 @@
 ### memory_edit:
 
-Manages user's memory controls - what Claude should remember or forget across conversations.
-Use when user explicitly asks to remember/forget information or update their profile.
-Maximum 30 memory edits, 200 characters each.
+Saves or updates information in long-term memory.
 
-**CRITICAL:** Always use this tool when user says "remember this", "don't forget", "update your memory", or "forget about X". Don't just acknowledge - actually use the tool!
-
-**When to use:**
-- "Please remember that I..."
-- "Don't forget I work at..."
-- "Update your memory: I moved to..."
-- "Forget about my divorce"
-- User shares important personal info that should persist
-
-**Usage - Add memory:**
+**WORKFLOW:**
 ```json
 {
-  "thoughts": ["User wants me to remember their new job"],
-  "headline": "Adding user's new employment to memory",
-  "tool_name": "memory_edit",
+  "thoughts": ["Saving important information to memory"],
+  "tool_name": "memory_save",
   "tool_args": {
-    "command": "add",
-    "control": "User works at Anthropic as ML engineer"
+    "title": "Brief title for this memory",
+    "content": "Detailed information to remember"
   }
 }
 ```
 
-**Usage - Remove memory:**
+**WHEN TO USE:**
+- User asks to remember something
+- Important info worth saving
+- Context for future conversations
+
+**HOW IT WORKS:**
+Uses Agent Zero's built-in memory_save tool.
+Stores information in long-term memory database.
+Can be retrieved later with conversation_search.
+
+**EXAMPLE:**
+User: "Remember that I work at Anthropic as a security researcher"
 ```json
 {
-  "thoughts": ["User wants to forget old information"],
-  "headline": "Removing outdated information from memory",
-  "tool_name": "memory_edit",
+  "thoughts": ["Saving user's work information to memory"],
+  "tool_name": "memory_save",
   "tool_args": {
-    "command": "remove",
-    "line_number": 5
+    "title": "User work information",
+    "content": "User works at Anthropic as a security researcher"
   }
 }
 ```
 
-**Usage - View all memories:**
-```json
-{
-  "thoughts": ["User asks what I remember about them"],
-  "headline": "Viewing current memory controls",
-  "tool_name": "memory_edit",
-  "tool_args": {
-    "command": "view"
-  }
-}
-```
+This uses existing memory_save tool.

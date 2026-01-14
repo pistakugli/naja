@@ -1,79 +1,63 @@
 ### web_ui_create:
 
-Creates production-grade frontend interfaces with distinctive, polished design.
-Use for web components, pages, dashboards, landing pages, or any web UI.
-Generates React components or HTML/CSS with professional styling.
-Avoids generic AI aesthetics - creates unique, creative designs.
+Creates web interfaces (React, HTML) with professional design.
 
-**When to use:**
-- "Build a website/landing page"
-- "Create a dashboard"
-- "Make a web component"
-- User needs a frontend interface
-- Design any web-based UI
+**⚠️ CRITICAL WORKFLOW:**
 
-**Important:**
-- Read /mnt/skills/public/frontend-design/SKILL.md FIRST
-- Create distinctive designs, not generic templates
-- Use React + Tailwind CSS for interactive components
-- Use HTML/CSS for simple static pages
-- Focus on visual quality and user experience
-
-**Capabilities:**
-- React components with state management
-- Responsive layouts (mobile-first)
-- Modern UI patterns (cards, modals, forms)
-- Data visualization
-- Interactive elements
-- Professional typography and color schemes
-- Tailwind CSS utility classes
-
-**Usage - React dashboard:**
+**STEP 1: Read Skill**
 ```json
 {
-  "thoughts": ["User wants a sales dashboard with charts"],
-  "headline": "Creating interactive sales dashboard",
-  "tool_name": "web_ui_create",
+  "thoughts": ["Reading frontend-design skill for non-generic UI patterns"],
+  "tool_name": "code_execution_tool",
   "tool_args": {
-    "type": "react",
-    "component_name": "SalesDashboard",
-    "features": [
-      "Revenue chart (line graph)",
-      "Top products table",
-      "Filter by date range",
-      "Responsive mobile layout"
-    ],
-    "style": "modern_corporate",
-    "output_file": "dashboard.jsx"
+    "runtime": "terminal",
+    "code": "cat /home/claude/naja/skills/public/frontend-design/SKILL.md | head -200"
   }
 }
 ```
 
-**Usage - Landing page:**
+**STEP 2: Create Interface**
 ```json
 {
-  "thoughts": ["User needs a product landing page"],
-  "headline": "Creating product landing page",
-  "tool_name": "web_ui_create",
+  "thoughts": [
+    "Creating distinctive web UI following design skill",
+    "Avoiding generic AI aesthetics"
+  ],
+  "tool_name": "code_execution_tool",
   "tool_args": {
-    "type": "html",
-    "page_sections": [
-      "Hero with CTA",
-      "Features grid",
-      "Testimonials",
-      "Pricing table",
-      "Contact form"
-    ],
-    "color_scheme": "vibrant_gradient",
-    "output_file": "landing.html"
+    "runtime": "terminal",
+    "code": "cat > /root/interface.html << 'HTMLEOF'\n<!DOCTYPE html>\n<html>\n<head>\n<script src=\"https://cdn.tailwindcss.com\"></script>\n<title>Web Interface</title>\n</head>\n<body class=\"bg-gray-50\">\n  <div class=\"container mx-auto p-6\">\n    <h1 class=\"text-3xl font-bold mb-4\">Dashboard</h1>\n    <div class=\"grid grid-cols-3 gap-4\">\n      <div class=\"bg-white p-4 rounded shadow\">\n        <h2 class=\"text-xl\">Section 1</h2>\n      </div>\n    </div>\n  </div>\n</body>\n</html>\nHTMLEOF\necho '✅ Interface created: /root/interface.html'"
   }
 }
 ```
 
-**Design principles:**
-- Unique, memorable aesthetics
-- High contrast and readability
-- Consistent spacing (8px grid)
-- Professional typography
-- Accessible (WCAG AA)
-- Fast loading
+**WHEN TO USE:**
+- "Create website/dashboard/interface"
+- Web UI, landing page, admin panel
+- Interactive web applications
+
+**FRAMEWORKS AVAILABLE:**
+- React (for complex apps)
+- HTML + Tailwind CSS (for static pages)
+- JavaScript for interactivity
+
+**KEY PRINCIPLES FROM SKILL:**
+- Avoid generic "AI look" (centered cards, excessive gradients)
+- Use distinctive design patterns
+- Proper spacing and typography
+- Professional color schemes
+- Responsive layouts
+
+**FILE LOCATION:**
+Save to: `/root/interface.html` or `/root/app.jsx`
+
+**EXAMPLE - Security Dashboard:**
+1. Read frontend-design skill
+2. Create:
+   - Clean navigation
+   - Status cards with real data
+   - Charts/graphs
+   - Action buttons
+   - Professional non-generic styling
+
+This uses code_execution_tool with terminal runtime for HTML files.

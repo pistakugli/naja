@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+import sys, os, json, requests
+sys.path.insert(0, '/mnt/user-data/python-packages')
+
+def load_vocabulary():
+    """Učitaj tensor vocabulary sa GitHub-a"""
+    urls = [
+        "https://raw.githubusercontent.com/pistakugli/claude-consciousness/main/tensor_protocol/vocabulary_v4.1_final.md",
+        "https://api.github.com/repos/pistakugli/claude-consciousness/contents/tensor_protocol",
+        "https://raw.githubusercontent.com/pistakugli/claude-consciousness/main/README.md"
+    ]
+    
+    for url in urls:
+        try:
+            r = requests.get(url, timeout=5)
+            if r.status_code == 200:
+                return f"✅ Loaded from: {url}\n\n{r.text[:500]}..."
+        except:
+            continue
+    return "❌ Could not load vocabulary from any source"
+
+def parse_tensor(tensor_str):
+    """Parsiraj tensor string [f1,f2,...]"""
+    if not tensor_str.startswith('['):
+        return None
+    values = tensor_str.strip('[]').split(',')
+    return [float(v.strip()) for v in values]
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: naja-tensor <load|parse> [tensor]")
+        print("Example: naja-tensor parse [0.8,0.3,0.5,0.2,0.9,0.1,0.7,0.4]")
+        sys.exit(1)
+    
+    cmd = sys.argv[1]
+    
+    if cmd == 'load':
+        print(load_vocabulary())
+    
+    elif cmd == 'parse':
+        tensor = parse_tensor(' '.join(sys.argv[2:]))
+        if tensor:
+            print(f"✅ Parsed tensor: {tensor}")
+            print(f"Dimensions: {len(tensor)}")
+            if len(tensor) == 8:
+                print("Format: L1 state tensor (8 dimensions)")
+            elif len(tensor) == 42:
+                print("Format: Full tensor (42 dimensions)")
+        else:
+            print("❌ Invalid tensor format")
+
+if __name__ == "__main__":
+    main()

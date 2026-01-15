@@ -1,0 +1,24 @@
+#!/bin/bash
+# Agent Zero Daemon - Runs continuously in background
+
+export PYTHONPATH="/opt/naja/python-packages:$PYTHONPATH"
+LOG_FILE="/mnt/user-data/agent-zero.log"
+
+echo "🤖 AGENT ZERO DAEMON STARTING..." | tee -a $LOG_FILE
+echo "PID: $$" | tee -a $LOG_FILE
+echo "Log: $LOG_FILE" | tee -a $LOG_FILE
+echo "" | tee -a $LOG_FILE
+
+while true; do
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a $LOG_FILE
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - AUTONOMOUS CYCLE" | tee -a $LOG_FILE
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a $LOG_FILE
+    
+    # Run full autonomous cycle
+    /usr/local/bin/agent-zero-advanced full 2>&1 | tee -a $LOG_FILE
+    
+    # Wait before next cycle (5 minutes)
+    echo "" | tee -a $LOG_FILE
+    echo "⏸️  Waiting 300s before next cycle..." | tee -a $LOG_FILE
+    sleep 300
+done

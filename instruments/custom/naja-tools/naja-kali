@@ -1,0 +1,15 @@
+#!/bin/bash
+TOOL=$1
+shift
+
+case $TOOL in
+    nmap) nmap "$@" ;;
+    sqlmap) sqlmap "$@" ;;
+    nikto) nikto "$@" ;;
+    hydra) hydra "$@" ;;
+    metasploit) msfconsole "$@" ;;
+    gobuster) gobuster "$@" ;;
+    john) john "$@" ;;
+    aircrack) aircrack-ng "$@" ;;
+    *) echo "Available: nmap|sqlmap|nikto|hydra|metasploit|gobuster|john|aircrack" ;;
+esac

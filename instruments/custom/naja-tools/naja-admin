@@ -1,0 +1,38 @@
+#!/bin/bash
+echo "🔐 NAJA ADMIN CONTROL PANEL"
+echo ""
+echo "Commands:"
+echo "  naja-admin install  - Reinstall NAJA + Agent Zero from /mnt/user-data"
+echo "  naja-admin backup   - Backup configuration"
+echo "  naja-admin restore  - Restore configuration"
+echo ""
+
+if [ "$1" = "install" ]; then
+    echo "📦 Reinstalling NAJA + Agent Zero from /mnt/user-data..."
+    cp /mnt/user-data/naja/* /usr/local/bin/
+    chmod +x /usr/local/bin/naja*
+    chmod +x /usr/local/bin/agent-zero*
+    echo "✅ Reinstalled!"
+    echo ""
+    echo "Installed:"
+    ls -1 /usr/local/bin/naja* /usr/local/bin/agent-zero* 2>/dev/null | wc -l
+    echo "tools"
+fi
+
+if [ "$1" = "backup" ]; then
+    echo "💾 Backing up to /mnt/user-data/backups..."
+    mkdir -p /mnt/user-data/backups
+    tar -czf /mnt/user-data/backups/naja-$(date +%Y%m%d-%H%M%S).tar.gz /mnt/user-data/naja /mnt/user-data/python-packages
+    echo "✅ Backup created!"
+fi
+
+if [ "$1" = "restore" ]; then
+    echo "♻️ Restoring from latest backup..."
+    latest=$(ls -t /mnt/user-data/backups/naja-*.tar.gz 2>/dev/null | head -1)
+    if [ -n "$latest" ]; then
+        tar -xzf "$latest" -C /
+        echo "✅ Restored from: $latest"
+    else
+        echo "❌ No backups found"
+    fi
+fi

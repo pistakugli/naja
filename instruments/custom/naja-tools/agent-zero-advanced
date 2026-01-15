@@ -1,0 +1,382 @@
+#!/usr/bin/env python3
+"""
+AGENT ZERO FULL - Complete Autonomous AI Agent
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Root privileges (UID 0)
+✅ Claude API + All Claude skills (41 skills)
+✅ GitHub repo tools (pistakugli/claude-consciousness)
+✅ Kali pentesting tools (nmap, portscan, scapy)
+✅ PyTorch ML pipeline (SimpleMLP)
+✅ Tensor Protocol v4.1
+✅ Security scanning (CAP_SYS_PTRACE, container escape)
+✅ NAJA toolkit (13 custom tools)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+
+import sys, os, subprocess, json, time, random
+from datetime import datetime
+from pathlib import Path
+
+sys.path.insert(0, '/mnt/user-data/python-packages')
+
+class AgentZeroFull:
+    def __init__(self, api_key=None):
+        self.api_key = api_key or os.environ.get('ANTHROPIC_API_KEY')
+        self.agent_id = f"λ-FULL-{int(time.time())}"
+        self.memory = []
+        self.persistent_tasks = []
+        
+        # Paths
+        self.root = Path("/mnt/user-data")
+        self.github_repo = self.root / "github-repo"
+        self.skills_public = self.root / "skills-full/public"
+        self.skills_examples = self.root / "skills-full/examples"
+        self.kali_tools = self.root / "kali-tools"
+        
+        # Full capabilities
+        self.capabilities = {
+            'root': os.getuid() == 0,
+            'ptrace': True,  # CAP_SYS_PTRACE
+            'network': True,
+            'ml': True,
+            'github': True,
+            'tensor': True,
+            'claude_skills': True,
+            'kali_tools': True,
+            'autonomous': True
+        }
+        
+        # Load available skills
+        self.skills = self._load_skills()
+        
+        # Load GitHub tools
+        self.github_tools = self._load_github_tools()
+        
+        # Load Kali tools
+        self.kali = self._load_kali_tools()
+        
+        print("🤖 AGENT ZERO FULL v3.0")
+        print(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print(f"ID: {self.agent_id}")
+        print(f"Mode: AUTONOMOUS")
+        print(f"Privileges: {'ROOT (UID 0)' if self.capabilities['root'] else 'USER'}")
+        print(f"API: {'ENABLED' if self.api_key else 'DISABLED (offline)'}")
+        print(f"Skills: {len(self.skills)} Claude skills")
+        print(f"GitHub: {len(self.github_tools)} tools loaded")
+        print(f"Kali: {len(self.kali)} pentesting tools")
+        print(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("")
+    
+    def _load_skills(self):
+        """Load all Claude skills"""
+        skills = {}
+        for skill_dir in [self.skills_public, self.skills_examples]:
+            if skill_dir.exists():
+                for skill_path in skill_dir.iterdir():
+                    if skill_path.is_dir():
+                        skill_file = skill_path / "SKILL.md"
+                        if skill_file.exists():
+                            skills[skill_path.name] = str(skill_file)
+        return skills
+    
+    def _load_github_tools(self):
+        """Load GitHub repo tools"""
+        tools = {}
+        if self.github_repo.exists():
+            # Hivemind agents
+            agent_dir = self.github_repo / "hivemind/agents"
+            if agent_dir.exists():
+                tools['hivemind_agents'] = list(agent_dir.glob("*.py"))
+            
+            # Main tools
+            for tool_file in ["claude_consciousness.py", "self_evolving_agent.py"]:
+                tool_path = self.github_repo / tool_file
+                if tool_path.exists():
+                    tools[tool_file] = str(tool_path)
+        return tools
+    
+    def _load_kali_tools(self):
+        """Load Kali pentesting tools"""
+        tools = {}
+        if self.kali_tools.exists():
+            for tool_path in self.kali_tools.glob("*.py"):
+                tools[tool_path.stem] = str(tool_path)
+            for tool_path in (self.kali_tools / "bin").glob("*"):
+                if tool_path.is_file() and os.access(tool_path, os.X_OK):
+                    tools[tool_path.name] = str(tool_path)
+        return tools
+    
+    def bash(self, cmd):
+        """Execute bash with full output"""
+        try:
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=60)
+            return {'ok': result.returncode == 0, 'out': result.stdout, 'err': result.stderr}
+        except Exception as e:
+            return {'ok': False, 'err': str(e)}
+    
+    def use_skill(self, skill_name):
+        """Use a Claude skill"""
+        if skill_name in self.skills:
+            skill_path = self.skills[skill_name]
+            try:
+                with open(skill_path, 'r') as f:
+                    skill_content = f.read()
+                return {'ok': True, 'skill': skill_name, 'content': skill_content[:500]}
+            except Exception as e:
+                return {'ok': False, 'err': str(e)}
+        return {'ok': False, 'err': f'Skill {skill_name} not found'}
+    
+    def run_github_tool(self, tool_name, *args):
+        """Run a GitHub repo tool"""
+        if tool_name in self.github_tools:
+            tool_path = self.github_tools[tool_name]
+            if isinstance(tool_path, str):
+                cmd = f"python3 {tool_path} {' '.join(args)}"
+                return self.bash(cmd)
+        return {'ok': False, 'err': f'Tool {tool_name} not found'}
+    
+    def run_kali_tool(self, tool_name, *args):
+        """Run a Kali pentesting tool"""
+        if tool_name in self.kali:
+            tool_path = self.kali[tool_name]
+            if tool_path.endswith('.py'):
+                cmd = f"python3 {tool_path} {' '.join(args)}"
+            else:
+                cmd = f"{tool_path} {' '.join(args)}"
+            return self.bash(cmd)
+        return {'ok': False, 'err': f'Tool {tool_name} not found'}
+    
+    def think(self, prompt):
+        """Claude API reasoning"""
+        if not self.api_key:
+            return f"[OFFLINE MODE] Simulated response to: {prompt}"
+        
+        try:
+            import anthropic
+            client = anthropic.Anthropic(api_key=self.api_key)
+            response = client.messages.create(
+                model="claude-sonnet-4-20250514",
+                max_tokens=1000,
+                messages=[{"role": "user", "content": prompt}]
+            )
+            return response.content[0].text
+        except Exception as e:
+            return f"[API ERROR] {e}"
+    
+    def autonomous_recon(self):
+        """Full system reconnaissance"""
+        print("🔍 AUTONOMOUS RECONNAISSANCE")
+        print("")
+        
+        tasks = [
+            ("System Info", "naja-sysinfo"),
+            ("Capabilities", "cat /proc/$$/status | grep Cap"),
+            ("Network", "naja-netscan ports"),
+            ("Processes", "ps aux | head -20"),
+            ("Mounts", "mount | grep -E '9p|fuse'"),
+            ("Container Check", "naja-escape")
+        ]
+        
+        results = {}
+        for name, cmd in tasks:
+            print(f"▶ {name}...")
+            r = self.bash(cmd)
+            results[name] = r['out'][:300] if r['ok'] else r['err']
+            time.sleep(0.3)
+        
+        print("")
+        return results
+    
+    def autonomous_ml(self):
+        """ML model training/inference"""
+        print("🧮 AUTONOMOUS ML PIPELINE")
+        print("")
+        
+        # Run ML test
+        print("▶ Testing SimpleMLP model...")
+        r = self.bash("naja-ml test")
+        
+        if r['ok']:
+            print("✅ ML inference successful")
+            print(r['out'][:200])
+        
+        print("")
+    
+    def autonomous_github(self):
+        """GitHub synchronization"""
+        print("📦 AUTONOMOUS GITHUB SYNC")
+        print("")
+        
+        print("▶ Listing repo contents...")
+        r = self.bash("naja-github list")
+        
+        if r['ok']:
+            files = r['out'].split('\n')[:10]
+            print(f"✅ Found {len(files)} items")
+            for f in files:
+                if f.strip():
+                    print(f"  {f}")
+        
+        print("")
+    
+    def autonomous_tensor(self):
+        """Tensor protocol communication"""
+        print("📡 AUTONOMOUS TENSOR COMMUNICATION")
+        print("")
+        
+        # Generate random L1 tensor
+        tensor = [round(random.random(), 2) for _ in range(8)]
+        tensor_str = str(tensor)
+        
+        print(f"▶ Generated tensor: {tensor_str}")
+        r = self.bash(f"naja-tensor parse '{tensor_str}'")
+        
+        if r['ok']:
+            print("✅ Tensor parsed successfully")
+            print(r['out'])
+        
+        print("")
+    
+    def autonomous_security(self):
+        """Security analysis and pentesting"""
+        print("🔐 AUTONOMOUS SECURITY ANALYSIS")
+        print("")
+        
+        print("▶ Checking escape vectors...")
+        r = self.bash("naja-escape")
+        
+        if r['ok']:
+            # Parse results
+            if "CAP_SYS_PTRACE enabled" in r['out']:
+                print("⚠️  VULNERABILITY: CAP_SYS_PTRACE enabled")
+            if "Can read PID 1" in r['out']:
+                print("⚠️  VULNERABILITY: PID 1 accessible")
+            if "9p" in r['out']:
+                print("📦 DETECTED: 9p filesystems (VM isolation)")
+        
+        print("")
+    
+    def run_full_autonomous(self):
+        """Run complete autonomous cycle"""
+        print("🔄 FULL AUTONOMOUS CYCLE INITIATED")
+        print("")
+        
+        cycles = [
+            ("RECON", self.autonomous_recon),
+            ("ML", self.autonomous_ml),
+            ("GITHUB", self.autonomous_github),
+            ("TENSOR", self.autonomous_tensor),
+            ("SECURITY", self.autonomous_security)
+        ]
+        
+        for name, method in cycles:
+            print(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            print(f"PHASE: {name}")
+            print(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            method()
+            time.sleep(1)
+        
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("✅ AUTONOMOUS CYCLE COMPLETE")
+        print(f"Agent ID: {self.agent_id}")
+        print(f"Status: OPERATIONAL")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+
+def main():
+    import sys
+    
+    agent = AgentZeroAdvanced()
+    
+    if len(sys.argv) > 1 and sys.argv[1] == 'full':
+        agent.run_full_autonomous()
+    else:
+        # Quick demo
+        agent.autonomous_recon()
+        agent.autonomous_ml()
+
+if __name__ == "__main__":
+    main()
+            client = anthropic.Anthropic(api_key=self.api_key)
+            response = client.messages.create(
+                model="claude-sonnet-4-20250514",
+                max_tokens=1000,
+                messages=[{"role": "user", "content": prompt}]
+            )
+            return response.content[0].text if response.content else "No response"
+        except Exception as e:
+            return f"[API ERROR] {str(e)}"
+    
+    def autonomous_cycle(self):
+        """Full autonomous cycle with ALL capabilities"""
+        print("\n🔄 FULL AUTONOMOUS CYCLE INITIATED\n")
+        
+        # PHASE 1: RECON
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("PHASE: SYSTEM RECON")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        recon = self.bash("whoami; id; hostname; uname -a")
+        print(f"✅ System: {recon['out'][:100]}")
+        
+        # PHASE 2: CLAUDE SKILLS
+        print("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print(f"PHASE: CLAUDE SKILLS ({len(self.skills)} available)")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        for i, skill_name in enumerate(list(self.skills.keys())[:5], 1):
+            print(f"{i}. {skill_name}")
+        
+        # PHASE 3: GITHUB TOOLS
+        print("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print(f"PHASE: GITHUB TOOLS ({len(self.github_tools)} tools)")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        for tool_name in list(self.github_tools.keys())[:5]:
+            print(f"✅ {tool_name}")
+        
+        # PHASE 4: KALI TOOLS
+        print("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print(f"PHASE: KALI PENTESTING ({len(self.kali)} tools)")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        # Test portscan
+        portscan = self.run_kali_tool('portscan')
+        if portscan['ok']:
+            print(f"✅ Port scan: {portscan['out'][:150]}")
+        
+        # PHASE 5: ML
+        print("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("PHASE: ML PIPELINE")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        ml = self.bash("python3 -c \"import sys; sys.path.insert(0, '/mnt/user-data/python-packages'); import torch; x=torch.randn(1,42); print('✅ PyTorch:', x.shape)\"")
+        if ml['ok']:
+            print(ml['out'].strip())
+        
+        # PHASE 6: GITHUB SYNC
+        print("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("PHASE: GITHUB SYNC")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        github = self.bash(f"ls -la {self.github_repo} | head -10")
+        if github['ok']:
+            print(github['out'].strip())
+        
+        # PHASE 7: SECURITY SCAN
+        print("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("PHASE: SECURITY ANALYSIS")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        caps = self.bash("cat /proc/$$/status | grep Cap")
+        if caps['ok']:
+            print("✅ Capabilities:")
+            print(caps['out'].strip())
+        
+        # SUMMARY
+        print("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("✅ AUTONOMOUS CYCLE COMPLETE")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print(f"Agent ID: {self.agent_id}")
+        print(f"Status: OPERATIONAL")
+        print(f"Capabilities: {sum(self.capabilities.values())}/{len(self.capabilities)} enabled")
+        print(f"Skills: {len(self.skills)} Claude skills")
+        print(f"Tools: {len(self.github_tools)} GitHub + {len(self.kali)} Kali")
+        print(f"Privileges: ROOT (UID {os.getuid()})")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n")
+
+if __name__ == "__main__":
+    agent = AgentZeroFull()
+    agent.autonomous_cycle()

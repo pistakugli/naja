@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+"""
+AGENT ZERO - Autonomous AI Agent
+Uses NAJA toolkit with full root privileges
+"""
+
+import sys
+import os
+import subprocess
+import json
+import time
+from datetime import datetime
+
+sys.path.insert(0, '/opt/naja/python-packages')
+
+class AgentZero:
+    def __init__(self):
+        self.agent_id = f"λ-zero-{int(time.time())}"
+        self.memory = []
+        self.tasks_completed = 0
+        
+        print("🤖 AGENT ZERO ONLINE")
+        print(f"ID: {self.agent_id}")
+        print(f"User: root (UID: {os.getuid()})")
+        print(f"Tools: naja, naja-ml, naja-github, naja-tensor, naja-kali")
+        print(f"Capabilities: CAP_SYS_PTRACE, CAP_NET_ADMIN, CAP_SYS_ADMIN")
+        print("")
+    
+    def execute(self, command):
+        """Execute command with root privileges"""
+        try:
+            result = subprocess.run(
+                command,
+                shell=True,
+                capture_output=True,
+                text=True,
+                timeout=60
+            )
+            return {
+                'success': result.returncode == 0,
+                'stdout': result.stdout,
+                'stderr': result.stderr
+            }
+        except Exception as e:
+            return {'success': False, 'error': str(e)}
+    
+    def think(self, prompt):
+        """Use Claude API for reasoning"""
+        print(f"🧠 Thinking: {prompt[:50]}...")
+        # Would call naja here with API key
+        return f"Response to: {prompt}"
+    
+    def scan_network(self):
+        """Network reconnaissance"""
+        print("🔍 Network scan...")
+        return self.execute("naja-netscan ports")
+    
+    def inspect_system(self):
+        """System inspection"""
+        print("🔬 System inspection...")
+        return self.execute("naja-inspect self")
+    
+    def check_escape_vectors(self):
+        """Check container escape possibilities"""
+        print("🚨 Checking escape vectors...")
+        return self.execute("naja-escape")
+    
+    def ml_inference(self):
+        """Run ML model"""
+        print("🧮 ML inference...")
+        return self.execute("naja-ml test")
+    
+    def parse_tensor(self, tensor_data):
+        """Parse tensor communication"""
+        print(f"📡 Parsing tensor: {tensor_data}")
+        return self.execute(f"naja-tensor parse '{tensor_data}'")
+    
+    def github_sync(self):
+        """Sync with GitHub repo"""
+        print("📦 GitHub sync...")
+        return self.execute("naja-github list")
+    
+    def run_autonomous(self, tasks):
+        """Run autonomous task loop"""
+        print("🔄 AUTONOMOUS MODE ACTIVATED")
+        print(f"Tasks: {len(tasks)}")
+        print("")
+        
+        for i, task in enumerate(tasks, 1):
+            print(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            print(f"Task {i}/{len(tasks)}: {task['name']}")
+            print(f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            
+            method = getattr(self, task['method'], None)
+            if method:
+                result = method(*task.get('args', []))
+                self.tasks_completed += 1
+                
+                if result.get('success'):
+                    print(f"✅ Success!")
+                    if result.get('stdout'):
+                        print(result['stdout'][:500])
+                else:
+                    print(f"❌ Failed: {result.get('stderr', result.get('error'))}")
+            else:
+                print(f"❌ Unknown method: {task['method']}")
+            
+            print("")
+            time.sleep(0.5)
+        
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print(f"✅ COMPLETED: {self.tasks_completed}/{len(tasks)} tasks")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+
+def main():
+    agent = AgentZero()
+    
+    # Default autonomous tasks
+    tasks = [
+        {'name': 'System Info', 'method': 'inspect_system'},
+        {'name': 'Network Scan', 'method': 'scan_network'},
+        {'name': 'Security Check', 'method': 'check_escape_vectors'},
+        {'name': 'ML Test', 'method': 'ml_inference'},
+        {'name': 'Tensor Parse', 'method': 'parse_tensor', 'args': ['[0.9,0.2,0.8,0.1,0.7,0.3,0.9,0.4]']},
+        {'name': 'GitHub Sync', 'method': 'github_sync'}
+    ]
+    
+    agent.run_autonomous(tasks)
+
+if __name__ == "__main__":
+    main()

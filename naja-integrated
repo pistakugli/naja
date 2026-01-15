@@ -1,0 +1,20 @@
+#!/bin/bash
+# NAJA INTEGRATED - Agent Zero + Claude + Kali
+
+REPO="/mnt/user-data/naja-repo"
+export PYTHONPATH="$REPO/python:$PYTHONPATH"
+export NAJA_HOME="$REPO"
+
+cd "$REPO"
+
+echo "🐍 NAJA INTEGRATED v1.0"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "📦 Skills: $(find claude_skills/ -name 'SKILL.md' 2>/dev/null | wc -l)"
+echo "🐍 Python: $(find python/ -name '*.py' 2>/dev/null | wc -l)"
+echo "🤖 Agents: $(ls -d agents/*/ 2>/dev/null | wc -l)"
+echo "💬 Prompts: $(ls prompts/ 2>/dev/null | wc -l)"
+echo "⚡ Custom: $(ls instruments/custom/naja-tools/ 2>/dev/null | wc -l)"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "Starting Agent Zero UI..."
+python3 run_ui.py "$@"

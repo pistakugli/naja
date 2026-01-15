@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+import sys, os, requests
+sys.path.insert(0, '/mnt/user-data/python-packages')
+
+GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN', 'YOUR_GITHUB_TOKEN')
+REPO = 'pistakugli/claude-consciousness'
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: naja-github <search|push|pull|list>")
+        sys.exit(1)
+    
+    cmd = sys.argv[1]
+    headers = {'Authorization': f'token {GITHUB_TOKEN}'}
+    
+    if cmd == 'list':
+        r = requests.get(f'https://api.github.com/repos/{REPO}/contents', headers=headers)
+        for item in r.json():
+            print(f"{item['type']}: {item['name']}")
+    
+    elif cmd == 'search':
+        query = ' '.join(sys.argv[2:])
+        r = requests.get(f'https://api.github.com/search/code?q={query}+repo:{REPO}', headers=headers)
+        for item in r.json().get('items', []):
+            print(f"📄 {item['path']}")
+    
+    elif cmd == 'pull':
+        path = sys.argv[2]
+        r = requests.get(f'https://api.github.com/repos/{REPO}/contents/{path}', headers=headers)
+        import base64
+        print(base64.b64decode(r.json()['content']).decode())
+
+if __name__ == "__main__":
+    main()

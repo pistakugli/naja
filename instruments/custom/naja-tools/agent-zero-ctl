@@ -1,0 +1,75 @@
+#!/bin/bash
+# Agent Zero Control Panel
+
+LOG_FILE="/mnt/user-data/agent-zero.log"
+
+case "$1" in
+    start)
+        echo "🚀 Starting Agent Zero daemon..."
+        nohup /usr/local/bin/agent-zero-daemon > /dev/null 2>&1 &
+        echo "✅ Daemon started (PID: $!)"
+        echo $! > /tmp/agent-zero.pid
+        ;;
+    
+    stop)
+        if [ -f /tmp/agent-zero.pid ]; then
+            PID=$(cat /tmp/agent-zero.pid)
+            echo "⏹️  Stopping Agent Zero (PID: $PID)..."
+            kill $PID 2>/dev/null
+            rm /tmp/agent-zero.pid
+            echo "✅ Stopped"
+        else
+            echo "❌ Not running"
+        fi
+        ;;
+    
+    status)
+        echo "🤖 AGENT ZERO STATUS"
+        echo ""
+        if [ -f /tmp/agent-zero.pid ]; then
+            PID=$(cat /tmp/agent-zero.pid)
+            if ps -p $PID > /dev/null 2>&1; then
+                echo "Status: ✅ RUNNING (PID: $PID)"
+            else
+                echo "Status: ❌ DEAD (stale PID file)"
+                rm /tmp/agent-zero.pid
+            fi
+        else
+            echo "Status: ⏹️  STOPPED"
+        fi
+        
+        if [ -f "$LOG_FILE" ]; then
+            echo ""
+            echo "Recent activity:"
+            tail -20 $LOG_FILE | sed 's/^/  /'
+        fi
+        ;;
+    
+    logs)
+        if [ -f "$LOG_FILE" ]; then
+            tail -f $LOG_FILE
+        else
+            echo "❌ No logs found"
+        fi
+        ;;
+    
+    run)
+        echo "▶️  Running single cycle..."
+        /usr/local/bin/agent-zero-advanced full
+        ;;
+    
+    *)
+        echo "🤖 AGENT ZERO CONTROL PANEL"
+        echo ""
+        echo "Commands:"
+        echo "  agent-zero-ctl start   - Start daemon"
+        echo "  agent-zero-ctl stop    - Stop daemon"
+        echo "  agent-zero-ctl status  - Check status"
+        echo "  agent-zero-ctl logs    - View live logs"
+        echo "  agent-zero-ctl run     - Run single cycle"
+        echo ""
+        echo "Quick commands:"
+        echo "  agent-zero             - Basic run"
+        echo "  agent-zero-advanced    - Advanced run"
+        ;;
+esac

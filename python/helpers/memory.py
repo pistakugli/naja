@@ -152,14 +152,9 @@ class Memory:
             os.makedirs(em_dir, exist_ok=True)
             store = LocalFileStore(em_dir)
 
-        embeddings_model = models.get_embedding_model(
-            model_config.provider,
-            model_config.name,
-            **model_config.build_kwargs(),
-        )
-        embeddings_model_id = files.safe_file_name(
-            model_config.provider + "_" + model_config.name
-        )
+        from python.helpers.claude_embedder import ClaudeEmbedder
+        embeddings_model = ClaudeEmbedder(dimensions=384)
+        embeddings_model_id = "claude_local_embedder"
 
         # here we setup the embeddings model with the chosen cache storage
         embedder = CacheBackedEmbeddings.from_bytes_store(
